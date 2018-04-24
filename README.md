@@ -13,7 +13,8 @@ This is a demo project being created to learn how to use
  <img src="fixtures.gif" alt="fixtures page" width="256">
 
  ### TODO
- - [ ] Add remote repository for fetch scores
- - [ ] Add local repository to savea few scores for offline use.
- - [ ] Add UI for "competitions" view
+ - [ ] Add remote repository to fetch scores other data
+ - [ ] Add Room database and local repository for offline use.
+ - [ ] Add UI for "competitions" view.
  - [ ] Add features to view leagues, teams and players.
+ - [ ] Add UI for empty states and offline error messages.
