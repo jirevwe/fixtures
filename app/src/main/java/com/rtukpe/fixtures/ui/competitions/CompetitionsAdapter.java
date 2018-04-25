@@ -6,25 +6,28 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.lb.auto_fit_textview.AutoResizeTextView;
 import com.rtukpe.fixtures.R;
-import com.rtukpe.fixtures.data.model.Movie;
+import com.rtukpe.fixtures.data.model.Competition;
 import com.rtukpe.fixtures.utils.others.RecyclerViewClickListener;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class CompetitionsAdapter extends RecyclerView.Adapter<CompetitionsAdapter.ViewHolder> {
 
-    private ArrayList<Movie> mFeeds;
+    private ArrayList<Competition> mCompetitions;
     private Context mContext;
     private RecyclerViewClickListener mRecyclerViewClickListener;
 
     public CompetitionsAdapter(@NonNull Context context) {
         this.mContext = context;
-        this.mFeeds = new ArrayList<>();
+        this.mCompetitions = new ArrayList<>();
     }
 
     public void setRecyclerViewClickListener(RecyclerViewClickListener mRecyclerViewClickListener) {
@@ -40,42 +43,49 @@ public class CompetitionsAdapter extends RecyclerView.Adapter<CompetitionsAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-//        holder.mFeedText.setText(mContext.getString(R.string.our_take_placeholder));
+        holder.competitionName.setText(mCompetitions.get(position).caption);
+        holder.competitionLogo.setImageDrawable(mContext.getResources().getDrawable(R.drawable.champions_league32x32));
     }
 
     @Override
     public int getItemCount() {
-        return mFeeds.size();
+        return mCompetitions.size();
     }
 
-    public Movie getBookAtPosition(int position) {
-        return mFeeds.get(position);
+    public Competition getCompetitionAtPosition(int position) {
+        return mCompetitions.get(position);
     }
 
-    public Movie getFirstBook() {
-        return mFeeds.get(0);
+    public Competition getFirstCompetition() {
+        return mCompetitions.get(0);
     }
 
-    public Movie getLastBook() {
-        return mFeeds.get(mFeeds.size() - 1);
+    public Competition getLastCompetition() {
+        return mCompetitions.get(mCompetitions.size() - 1);
     }
 
-    public void addBook(Movie set) {
-        mFeeds.add(set);
+    public void addCompetition(Competition set) {
+        mCompetitions.add(set);
         notifyDataSetChanged();
     }
 
-    public void addBooks(Collection<Movie> movies) {
-        mFeeds.addAll(movies);
+    public void addCompetitions(Collection<Competition> competitions) {
+        mCompetitions.addAll(competitions);
         notifyDataSetChanged();
     }
 
     public void clear() {
-        mFeeds.clear();
+        mCompetitions.clear();
         notifyDataSetChanged();
     }
 
     protected class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        @BindView(R.id.competition_logo)
+        ImageView competitionLogo;
+
+        @BindView(R.id.competition_name)
+        AutoResizeTextView competitionName;
 
         RecyclerViewClickListener recyclerViewClickListener;
 

@@ -21,15 +21,13 @@ public class CompetitionsPresenter<V extends CompetitionsMvpView> extends BasePr
     }
 
     @Override
-    public void getFeed() {
+    public void getCompetitions() {
         getCompositeDisposable().add(
                 getDataManager()
-                        .getMovies()
+                        .getCompetitions()
                         .subscribeOn(getSchedulerProvider().io())
                         .observeOn(getSchedulerProvider().ui())
-                        .subscribe(books -> {
-                            getMvpView().updateBooks(books);
-                        })
+                        .subscribe(competitions -> getMvpView().updateCompetitions(competitions))
         );
     }
 }

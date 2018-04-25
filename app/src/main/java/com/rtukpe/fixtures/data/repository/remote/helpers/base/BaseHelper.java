@@ -21,11 +21,10 @@ public class BaseHelper {
             .addConverterFactory(GsonConverterFactory.create(gson));
 
     private static String getBaseUrl() {
-//        return "http://10.0.2.2:3000/api/";
-        return "https://ouida-web.herokuapp.com/api/";
+        return "http://api.football-data.org/";
     }
 
-    public <S> S createService(Class<S> serviceClass) {
+    protected <S> S createService(Class<S> serviceClass) {
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         okHttpCBuilder.networkInterceptors().add(httpLoggingInterceptor);

@@ -12,22 +12,6 @@ public class BaseResponse<T> {
     private Object message;
     private Object meta;
 
-    public T getData() {
-        return data;
-    }
-
-    public Object getMessage() {
-        return message;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public Object getMeta() {
-        return meta;
-    }
-
     @Override
     public String toString() {
         return AppUtils.gson.toJson(this);

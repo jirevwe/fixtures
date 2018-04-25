@@ -4,6 +4,6 @@ import com.rtukpe.fixtures.ui.base.MvpPresenter;
 
 public interface FixturesMvpContract<V extends FixturesMvpView> extends MvpPresenter<V> {
 
-    void getBooks();
+    void getFixtures();
 
 }

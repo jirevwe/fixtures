@@ -117,6 +117,11 @@ public class DashboardActivity extends BaseActivity implements DashboardMvpView,
     }
 
     @Override
+    public void showHideToolBar(boolean hide) {
+        toolbar.setVisibility(hide ? View.GONE : View.VISIBLE);
+    }
+
+    @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putInt(SELECTED_ITEM, mSelectedItem);
         super.onSaveInstanceState(outState);

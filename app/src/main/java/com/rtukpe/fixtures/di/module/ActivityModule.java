@@ -12,7 +12,7 @@ import com.rtukpe.fixtures.ui.competitions.CompetitionsAdapter;
 import com.rtukpe.fixtures.ui.competitions.CompetitionsMvpContract;
 import com.rtukpe.fixtures.ui.competitions.CompetitionsMvpView;
 import com.rtukpe.fixtures.ui.competitions.CompetitionsPresenter;
-import com.rtukpe.fixtures.ui.fixtures.FixturesListAdapter;
+import com.rtukpe.fixtures.ui.fixtures.FixturesAdapter;
 import com.rtukpe.fixtures.ui.fixtures.FixturesMvpContract;
 import com.rtukpe.fixtures.ui.fixtures.FixturesMvpView;
 import com.rtukpe.fixtures.ui.fixtures.FixturesPresenter;
@@ -87,8 +87,8 @@ public class ActivityModule {
     }
 
     @Provides
-    FixturesListAdapter provideOwnedBooksListAdapter(AppCompatActivity activity) {
-        return new FixturesListAdapter(activity);
+    FixturesAdapter provideOwnedBooksListAdapter(AppCompatActivity activity) {
+        return new FixturesAdapter(activity);
     }
 
     @Provides

@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rtukpe.fixtures.R;
-import com.rtukpe.fixtures.data.model.Movie;
+import com.rtukpe.fixtures.data.model.Competition;
 import com.rtukpe.fixtures.di.component.ActivityComponent;
 import com.rtukpe.fixtures.ui.base.BaseFragment;
 
@@ -72,7 +72,7 @@ public class CompetitionsFragment extends BaseFragment implements CompetitionsMv
     protected void setUp(View view) {
         mPresenter.onViewInitialized();
 
-        mPresenter.getFeed();
+        mPresenter.getCompetitions();
 
         recyclerView.setAdapter(competitionsAdapter);
         recyclerView.setLayoutManager(mLinearLayoutManager);
@@ -85,7 +85,7 @@ public class CompetitionsFragment extends BaseFragment implements CompetitionsMv
     }
 
     @Override
-    public void updateBooks(ArrayList<Movie> movies) {
-        competitionsAdapter.addBooks(movies);
+    public void updateCompetitions(ArrayList<Competition> competitions) {
+        competitionsAdapter.addCompetitions(competitions);
     }
 }

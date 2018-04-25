@@ -16,4 +16,9 @@
     <string name="league_name_ph">Campeonato Brasileiro da Série A</string>
     <string name="team_logo">team_logo</string>
     <string name="chevron_right">chevron right</string>
+    <string name="competition_name_ph">Champions League</string>
+    <string name="minutes_ph">46\' + 1</string>
+    <string name="fixture_status_ph">Finished</string>
+    <string name="fixture_start_time_ph">07:12</string>
+    <string name="fixture_match_day_ph">EPL 20</string>
 </resources>

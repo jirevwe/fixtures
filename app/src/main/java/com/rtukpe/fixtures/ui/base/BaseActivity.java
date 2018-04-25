@@ -163,6 +163,8 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
         }
     }
 
+    public abstract void showHideToolBar(boolean hide);
+
     public void setUnBinder(Unbinder unBinder) {
         mUnBinder = unBinder;
     }

@@ -11,5 +11,4 @@ import com.rtukpe.fixtures.data.repository.remote.api.RemoteServiceApi;
 
 public interface DataManager extends RemoteServiceApi, LocalDataInterface, MockerInterface {
 
-
 }

@@ -21,15 +21,13 @@ public class FixturesPresenter<V extends FixturesMvpView> extends BasePresenter<
     }
 
     @Override
-    public void getBooks() {
+    public void getFixtures() {
         getCompositeDisposable().add(
                 getDataManager()
-                        .getMovies()
+                        .getFixtures("p1")
                         .subscribeOn(getSchedulerProvider().io())
                         .observeOn(getSchedulerProvider().ui())
-                        .subscribe(books -> {
-                            getMvpView().updateBooks(books);
-                        })
+                        .subscribe(fixtures -> getMvpView().updateFixtures(fixtures.fixtures))
         );
     }
 }

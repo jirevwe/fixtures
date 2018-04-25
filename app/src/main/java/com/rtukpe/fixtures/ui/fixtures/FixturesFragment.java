@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rtukpe.fixtures.R;
-import com.rtukpe.fixtures.data.model.Movie;
+import com.rtukpe.fixtures.data.model.Fixture;
 import com.rtukpe.fixtures.di.component.ActivityComponent;
 import com.rtukpe.fixtures.ui.base.BaseFragment;
 
@@ -28,8 +28,6 @@ import butterknife.ButterKnife;
 import timber.log.Timber;
 
 public class FixturesFragment extends BaseFragment implements FixturesMvpView {
-
-    public static String TYPE = "NotificationsFragment.TYPE";
 
     @BindView(R.id.recylcer_view)
     RecyclerView recyclerView;
@@ -44,7 +42,7 @@ public class FixturesFragment extends BaseFragment implements FixturesMvpView {
     DividerItemDecoration mDividerItemDecoration;
 
     @Inject
-    FixturesListAdapter fixturesListAdapter;
+    FixturesAdapter fixturesAdapter;
 
     @Inject
     FixturesMvpContract<FixturesMvpView> mPresenter;
@@ -88,13 +86,13 @@ public class FixturesFragment extends BaseFragment implements FixturesMvpView {
     protected void setUp(View view) {
         mPresenter.onViewInitialized();
 
-        mPresenter.getBooks();
+        mPresenter.getFixtures();
 
-        recyclerView.setAdapter(fixturesListAdapter);
+        recyclerView.setAdapter(fixturesAdapter);
         recyclerView.setLayoutManager(mLinearLayoutManager);
 //        recyclerView.addItemDecoration(mDividerItemDecoration);
 
-        fixturesListAdapter.setRecyclerViewClickListener(this);
+        fixturesAdapter.setRecyclerViewClickListener(this);
     }
 
     @Override
@@ -108,8 +106,8 @@ public class FixturesFragment extends BaseFragment implements FixturesMvpView {
     }
 
     @Override
-    public void updateBooks(ArrayList<Movie> movies) {
-        fixturesListAdapter.addBooks(movies);
+    public void updateFixtures(ArrayList<Fixture> fixtures) {
+        fixturesAdapter.addFixtures(fixtures);
         Timber.d(String.format("Recycler View Count: %d %d %d", recyclerView.getHeight(), recyclerView.getWidth(), recyclerView.getAdapter().getItemCount()));
     }
 }

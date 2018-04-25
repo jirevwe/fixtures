@@ -24,11 +24,6 @@
         <item name="actionMenuTextColor">#000</item>
     </style>
 
-    <style name="RatingBar" parent="Theme.AppCompat">
-        <item name="colorControlActivated">@color/tangerine</item>
-        <item name="colorControlNormal">@color/gray_active_icon</item>
-    </style>
-
     <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
     <style name="ToolbarDark" parent="Theme.AppCompat.Light.NoActionBar">
@@ -105,7 +100,7 @@
     </style>
 
     <style name="AppTheme.Widget.TextView" parent="android:Widget.Holo.Light.TextView">
-        <item name="fontPath">fonts/RobotoCondensed-Regular.ttf</item>
+        <item name="fontPath">font/RobotoCondensed-Regular.ttf</item>
     </style>
 
     <style name="AppTab.TextAppearance" parent="TextAppearance.Design.Tab">

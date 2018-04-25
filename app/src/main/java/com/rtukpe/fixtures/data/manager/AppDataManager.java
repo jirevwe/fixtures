@@ -2,16 +2,13 @@ package com.rtukpe.fixtures.data.manager;
 
 import android.content.Context;
 
-import com.rtukpe.fixtures.data.model.Movie;
-import com.rtukpe.fixtures.data.repository.local.helper.LocalDataHelper;
+import com.rtukpe.fixtures.data.model.Competition;
+import com.rtukpe.fixtures.data.model.FixturesResponse;
 import com.rtukpe.fixtures.data.repository.mock.MockHelper;
 import com.rtukpe.fixtures.data.repository.remote.helpers.RemoteServiceHelper;
-import com.rtukpe.fixtures.data.repository.remote.responses.impl.MovieResponse;
-import com.rtukpe.fixtures.data.repository.remote.responses.impl.MoviesResponse;
 import com.rtukpe.fixtures.di.annotations.ApplicationContext;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -29,47 +26,33 @@ public class AppDataManager implements DataManager {
 
     private Context mContext;
     private RemoteServiceHelper mRemoteServiceHelper;
-    private LocalDataHelper mLocalDataHelper;
     private MockHelper mMockHelper;
 
     @Inject
-    public AppDataManager(@ApplicationContext Context mContext,
-                          RemoteServiceHelper mRemoteServiceHelper,
-                          LocalDataHelper mLocalDataHelper,
-                          MockHelper mockHelper) {
+    AppDataManager(@ApplicationContext Context mContext,
+                   RemoteServiceHelper mRemoteServiceHelper,
+                   MockHelper mockHelper) {
         this.mContext = mContext;
         this.mRemoteServiceHelper = mRemoteServiceHelper;
-        this.mLocalDataHelper = mLocalDataHelper;
         this.mMockHelper = mockHelper;
     }
 
-    @Override
-    public Observable<MovieResponse> signUpUser(HashMap<String, Object> body) {
-        return mRemoteServiceHelper.signUpUser(body);
+    public Context getContext() {
+        return mContext;
     }
 
     @Override
-    public Observable<MovieResponse> signInUser(HashMap<String, Object> body) {
-        return mRemoteServiceHelper.signInUser(body);
+    public Observable<ArrayList<Competition>> getCompetitions() {
+        return mRemoteServiceHelper.getCompetitions();
     }
 
     @Override
-    public Observable<MovieResponse> updateUser(String id) {
-        return mRemoteServiceHelper.updateUser(id);
+    public Observable<FixturesResponse> getFixtures(String timeFrame) {
+        return mRemoteServiceHelper.getFixtures(timeFrame);
     }
 
     @Override
-    public Observable<MoviesResponse> getBooksRemote() {
-        return mRemoteServiceHelper.getBooksRemote();
-    }
-
-    @Override
-    public Observable<MovieResponse> getBookRemote(String id) {
-        return mRemoteServiceHelper.getBookRemote(id);
-    }
-
-    @Override
-    public Observable<ArrayList<Movie>> getMovies() {
-        return mMockHelper.getMovies();
+    public Observable<FixturesResponse> getMockFixtures() {
+        return mMockHelper.getMockFixtures();
     }
 }
