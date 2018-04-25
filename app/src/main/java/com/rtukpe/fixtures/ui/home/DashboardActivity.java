@@ -15,7 +15,7 @@ import android.widget.FrameLayout;
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx;
 import com.rtukpe.fixtures.R;
 import com.rtukpe.fixtures.ui.base.BaseActivity;
-import com.rtukpe.fixtures.ui.feed.CompetitionsFragment;
+import com.rtukpe.fixtures.ui.competitions.CompetitionsFragment;
 import com.rtukpe.fixtures.ui.fixtures.FixturesFragment;
 
 import javax.inject.Inject;

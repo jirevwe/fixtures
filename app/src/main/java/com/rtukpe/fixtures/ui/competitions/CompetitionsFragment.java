@@ -1,4 +1,4 @@
-package com.rtukpe.fixtures.ui.feed;
+package com.rtukpe.fixtures.ui.competitions;
 
 
 import android.os.Bundle;

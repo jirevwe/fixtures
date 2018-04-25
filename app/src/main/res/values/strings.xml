@@ -15,4 +15,5 @@
     <string name="expand_or_collapse">Expand or Collapse</string>
     <string name="league_name_ph">Campeonato Brasileiro da Série A</string>
     <string name="team_logo">team_logo</string>
+    <string name="chevron_right">chevron right</string>
 </resources>

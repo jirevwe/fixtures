@@ -84,7 +84,6 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:4.5.1'
 
     kapt "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
-    kapt "io.realm:realm-annotations-processor:$rootProject.realmVersion"
     kapt "com.android.databinding:compiler:$rootProject.androidPluginVersion"
     kapt "com.google.dagger:dagger-android-processor:$rootProject.daggerVersion"
     kapt "com.jakewharton:butterknife-compiler:$rootProject.butterKnifeVersion"

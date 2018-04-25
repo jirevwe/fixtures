@@ -1,4 +1,4 @@
-package com.rtukpe.fixtures.ui.feed;
+package com.rtukpe.fixtures.ui.competitions;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -34,7 +34,7 @@ public class CompetitionsAdapter extends RecyclerView.Adapter<CompetitionsAdapte
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.layout_fixtures_header_item, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.layout_competition_item, parent, false);
         return new ViewHolder(view, mRecyclerViewClickListener);
     }
 

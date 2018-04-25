@@ -8,10 +8,10 @@ import android.support.v7.widget.LinearLayoutManager;
 
 import com.rtukpe.fixtures.di.annotations.ActivityContext;
 import com.rtukpe.fixtures.di.annotations.PerActivity;
-import com.rtukpe.fixtures.ui.feed.CompetitionsAdapter;
-import com.rtukpe.fixtures.ui.feed.CompetitionsMvpContract;
-import com.rtukpe.fixtures.ui.feed.CompetitionsMvpView;
-import com.rtukpe.fixtures.ui.feed.CompetitionsPresenter;
+import com.rtukpe.fixtures.ui.competitions.CompetitionsAdapter;
+import com.rtukpe.fixtures.ui.competitions.CompetitionsMvpContract;
+import com.rtukpe.fixtures.ui.competitions.CompetitionsMvpView;
+import com.rtukpe.fixtures.ui.competitions.CompetitionsPresenter;
 import com.rtukpe.fixtures.ui.fixtures.FixturesListAdapter;
 import com.rtukpe.fixtures.ui.fixtures.FixturesMvpContract;
 import com.rtukpe.fixtures.ui.fixtures.FixturesMvpView;

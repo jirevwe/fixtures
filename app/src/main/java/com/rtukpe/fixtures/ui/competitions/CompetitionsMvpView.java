@@ -1,4 +1,4 @@
-package com.rtukpe.fixtures.ui.feed;
+package com.rtukpe.fixtures.ui.competitions;
 
 import com.rtukpe.fixtures.data.model.Movie;
 import com.rtukpe.fixtures.ui.base.MvpView;
