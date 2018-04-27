@@ -70,15 +70,6 @@ public class DashboardActivity extends BaseActivity implements DashboardMvpView,
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            default:
-                break;
-        }
-        return false;
-    }
-
-    @Override
     protected void setUp() {
         mPresenter.onViewInitialized();
         setSupportActionBar(toolbar);

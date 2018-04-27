@@ -96,7 +96,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="4dp"
                 android:layout_marginStart="4dp"
@@ -110,7 +110,6 @@
                     android:layout_marginTop="4dp"
                     android:gravity="start|center"
                     android:lines="1"
-                    android:maxLength="20"
                     android:text="Arsenal"
                     android:textColor="@color/black"
                     android:textSize="20sp"
@@ -126,7 +125,6 @@
                     android:layout_marginTop="4dp"
                     android:gravity="start|center"
                     android:lines="1"
-                    android:maxLength="20"
                     android:text="Manchester Utd"
                     android:textColor="@color/black"
                     android:textSize="20sp"

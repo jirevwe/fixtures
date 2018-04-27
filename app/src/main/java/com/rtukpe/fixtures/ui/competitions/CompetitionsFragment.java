@@ -1,6 +1,7 @@
 package com.rtukpe.fixtures.ui.competitions;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +16,7 @@ import com.rtukpe.fixtures.R;
 import com.rtukpe.fixtures.data.model.Competition;
 import com.rtukpe.fixtures.di.component.ActivityComponent;
 import com.rtukpe.fixtures.ui.base.BaseFragment;
+import com.rtukpe.fixtures.ui.competition.CompetitionActivity;
 
 import java.util.ArrayList;
 
@@ -81,7 +83,9 @@ public class CompetitionsFragment extends BaseFragment implements CompetitionsMv
 
     @Override
     public void recyclerViewListClicked(View v, int position) {
-
+        Intent intent = CompetitionActivity.getStartIntent(getBaseActivity());
+        intent.putExtra("COMPETITION", competitionsAdapter.getCompetitionAtPosition(position).id);
+        startActivity(intent);
     }
 
     @Override

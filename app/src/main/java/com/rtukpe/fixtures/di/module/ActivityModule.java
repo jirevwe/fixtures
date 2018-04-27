@@ -8,6 +8,14 @@ import android.support.v7.widget.LinearLayoutManager;
 
 import com.rtukpe.fixtures.di.annotations.ActivityContext;
 import com.rtukpe.fixtures.di.annotations.PerActivity;
+import com.rtukpe.fixtures.ui.competition.CompetitionMvpContract;
+import com.rtukpe.fixtures.ui.competition.CompetitionMvpView;
+import com.rtukpe.fixtures.ui.competition.CompetitionPagerAdapter;
+import com.rtukpe.fixtures.ui.competition.CompetitionPresenter;
+import com.rtukpe.fixtures.ui.competition.teams.TeamsAdapter;
+import com.rtukpe.fixtures.ui.competition.teams.TeamsMvpContract;
+import com.rtukpe.fixtures.ui.competition.teams.TeamsMvpView;
+import com.rtukpe.fixtures.ui.competition.teams.TeamsPresenter;
 import com.rtukpe.fixtures.ui.competitions.CompetitionsAdapter;
 import com.rtukpe.fixtures.ui.competitions.CompetitionsMvpContract;
 import com.rtukpe.fixtures.ui.competitions.CompetitionsMvpView;
@@ -67,12 +75,23 @@ public class ActivityModule {
     }
 
     @Provides
-    FixturesMvpContract<FixturesMvpView> provideTitlesPresenter(FixturesPresenter<FixturesMvpView> presenter) {
+    @PerActivity
+    CompetitionMvpContract<CompetitionMvpView> provideCompetitionPresenter(CompetitionPresenter<CompetitionMvpView> presenter) {
         return presenter;
     }
 
     @Provides
-    CompetitionsMvpContract<CompetitionsMvpView> provideFeedMvpPresenter(CompetitionsPresenter<CompetitionsMvpView> presenter) {
+    FixturesMvpContract<FixturesMvpView> provideFixturesPresenter(FixturesPresenter<FixturesMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    CompetitionsMvpContract<CompetitionsMvpView> provideCompetitionsMvpPresenter(CompetitionsPresenter<CompetitionsMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    TeamsMvpContract<TeamsMvpView> provideTeamsMvpPresenter(TeamsPresenter<TeamsMvpView> presenter) {
         return presenter;
     }
 
@@ -87,13 +106,23 @@ public class ActivityModule {
     }
 
     @Provides
-    FixturesAdapter provideOwnedBooksListAdapter(AppCompatActivity activity) {
+    FixturesAdapter provideFixturesAdapter(AppCompatActivity activity) {
         return new FixturesAdapter(activity);
     }
 
     @Provides
-    CompetitionsAdapter provideFeedAdapter(AppCompatActivity activity) {
+    TeamsAdapter provideTeamsAdapter(AppCompatActivity activity) {
+        return new TeamsAdapter(activity);
+    }
+
+    @Provides
+    CompetitionsAdapter provideCompetitionsAdapter(AppCompatActivity activity) {
         return new CompetitionsAdapter(activity);
+    }
+
+    @Provides
+    CompetitionPagerAdapter provideCompetitionPagerAdapter(AppCompatActivity activity) {
+        return new CompetitionPagerAdapter(activity.getSupportFragmentManager());
     }
 
     @Provides

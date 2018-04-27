@@ -18,7 +18,7 @@
         android:layout_margin="8dp">
 
         <ImageView
-            android:id="@+id/competition_logo"
+            android:id="@+id/competition.logo"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_marginBottom="4dp"
@@ -31,14 +31,14 @@
             android:src="@drawable/champions_league32x32"/>
 
         <com.lb.auto_fit_textview.AutoResizeTextView
-            android:id="@+id/competition_name"
+            android:id="@+id/competition.name"
             android:layout_width="match_parent"
             android:layout_height="32dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:layout_toEndOf="@id/competition_logo"
-            android:layout_toRightOf="@id/competition_logo"
+            android:layout_toEndOf="@id/competition.logo"
+            android:layout_toRightOf="@id/competition.logo"
             android:gravity="start|center"
             android:lines="1"
             android:text="@string/competition_name_ph"

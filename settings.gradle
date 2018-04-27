@@ -1,1 +1,1 @@
-include ':app', ':expandabletextview'
+include ':app', ':expandabletextview', ':androidsvg-1.2.1'

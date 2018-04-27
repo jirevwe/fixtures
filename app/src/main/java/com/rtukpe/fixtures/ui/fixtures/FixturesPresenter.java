@@ -6,6 +6,7 @@ import com.rtukpe.fixtures.utils.rx.SchedulerProvider;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
 import io.reactivex.disposables.CompositeDisposable;
 
 public class FixturesPresenter<V extends FixturesMvpView> extends BasePresenter<V> implements FixturesMvpContract<V> {
@@ -23,11 +24,14 @@ public class FixturesPresenter<V extends FixturesMvpView> extends BasePresenter<
     @Override
     public void getFixtures() {
         getCompositeDisposable().add(
-                getDataManager()
-                        .getFixtures("p1")
-                        .subscribeOn(getSchedulerProvider().io())
+                Observable.zip(getDataManager().getFixtures("p1"),
+                        getDataManager().getFixtures("n1"),
+                        (fixturesResponse, fixturesResponse2) -> {
+                            fixturesResponse.fixtures.addAll(fixturesResponse2.fixtures);
+                            return fixturesResponse;
+                        }).subscribeOn(getSchedulerProvider().io())
                         .observeOn(getSchedulerProvider().ui())
-                        .subscribe(fixtures -> getMvpView().updateFixtures(fixtures.fixtures))
+                        .subscribe(fixturesResponse -> getMvpView().updateFixtures(fixturesResponse.fixtures))
         );
     }
 }

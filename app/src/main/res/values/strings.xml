@@ -21,4 +21,6 @@
     <string name="fixture_status_ph">Finished</string>
     <string name="fixture_start_time_ph">07:12</string>
     <string name="fixture_match_day_ph">EPL 20</string>
+    <string name="title_activity_competition">Competition</string>
+    <string name="teams">Teams</string>
 </resources>

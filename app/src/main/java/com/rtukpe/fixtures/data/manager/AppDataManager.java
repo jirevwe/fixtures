@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.rtukpe.fixtures.data.model.Competition;
 import com.rtukpe.fixtures.data.model.FixturesResponse;
+import com.rtukpe.fixtures.data.model.TeamsResponse;
 import com.rtukpe.fixtures.data.repository.mock.MockHelper;
 import com.rtukpe.fixtures.data.repository.remote.helpers.RemoteServiceHelper;
 import com.rtukpe.fixtures.di.annotations.ApplicationContext;
@@ -54,5 +55,10 @@ public class AppDataManager implements DataManager {
     @Override
     public Observable<FixturesResponse> getMockFixtures() {
         return mMockHelper.getMockFixtures();
+    }
+
+    @Override
+    public Observable<TeamsResponse> getMockTeams() {
+        return mMockHelper.getMockTeams();
     }
 }

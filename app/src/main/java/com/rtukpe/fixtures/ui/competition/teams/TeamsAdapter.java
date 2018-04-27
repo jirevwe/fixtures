@@ -1,4 +1,4 @@
-package com.rtukpe.fixtures.ui.competitions;
+package com.rtukpe.fixtures.ui.competition.teams;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -10,7 +10,8 @@ import android.widget.ImageView;
 
 import com.lb.auto_fit_textview.AutoResizeTextView;
 import com.rtukpe.fixtures.R;
-import com.rtukpe.fixtures.data.model.Competition;
+import com.rtukpe.fixtures.data.model.Team;
+import com.rtukpe.fixtures.utils.others.ImageUtils;
 import com.rtukpe.fixtures.utils.others.RecyclerViewClickListener;
 
 import java.util.ArrayList;
@@ -19,15 +20,15 @@ import java.util.Collection;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class CompetitionsAdapter extends RecyclerView.Adapter<CompetitionsAdapter.ViewHolder> {
+public class TeamsAdapter extends RecyclerView.Adapter<TeamsAdapter.ViewHolder> {
 
-    private ArrayList<Competition> mCompetitions;
+    private ArrayList<Team> teams;
     private Context mContext;
     private RecyclerViewClickListener mRecyclerViewClickListener;
 
-    public CompetitionsAdapter(@NonNull Context context) {
+    public TeamsAdapter(@NonNull Context context) {
         this.mContext = context;
-        this.mCompetitions = new ArrayList<>();
+        this.teams = new ArrayList<>();
     }
 
     public void setRecyclerViewClickListener(RecyclerViewClickListener mRecyclerViewClickListener) {
@@ -43,49 +44,53 @@ public class CompetitionsAdapter extends RecyclerView.Adapter<CompetitionsAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.competitionName.setText(mCompetitions.get(position).caption);
-        holder.competitionLogo.setImageDrawable(mContext.getResources().getDrawable(R.drawable.champions_league32x32));
+        holder.teamName.setText(teams.get(holder.getAdapterPosition()).name);
+        if (teams.get(holder.getAdapterPosition()).logo != null && teams.get(holder.getAdapterPosition()).logo.contains("svg")) {
+            ImageUtils.loadSVG(mContext, teams.get(holder.getAdapterPosition()).logo, holder.teamLogo);
+        } else if (teams.get(holder.getAdapterPosition()).logo != null) {
+            ImageUtils.displayImageFromUrl(mContext, teams.get(holder.getAdapterPosition()).logo, holder.teamLogo);
+        }
     }
 
     @Override
     public int getItemCount() {
-        return mCompetitions.size();
+        return teams.size();
     }
 
-    public Competition getCompetitionAtPosition(int position) {
-        return mCompetitions.get(position);
+    public Team getTeamAtPosition(int position) {
+        return teams.get(position);
     }
 
-    public Competition getFirstCompetition() {
-        return mCompetitions.get(0);
+    public Team getFirstTeam() {
+        return teams.get(0);
     }
 
-    public Competition getLastCompetition() {
-        return mCompetitions.get(mCompetitions.size() - 1);
+    public Team getLastTeam() {
+        return teams.get(teams.size() - 1);
     }
 
-    public void addCompetition(Competition set) {
-        mCompetitions.add(set);
+    public void addTeam(Team team) {
+        teams.add(team);
         notifyDataSetChanged();
     }
 
-    public void addCompetitions(Collection<Competition> competitions) {
-        mCompetitions.addAll(competitions);
+    public void addTeams(Collection<Team> teams) {
+        this.teams.addAll(teams);
         notifyDataSetChanged();
     }
 
     public void clear() {
-        mCompetitions.clear();
+        teams.clear();
         notifyDataSetChanged();
     }
 
-    protected class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         @BindView(R.id.competition_logo)
-        ImageView competitionLogo;
+        ImageView teamLogo;
 
         @BindView(R.id.competition_name)
-        AutoResizeTextView competitionName;
+        AutoResizeTextView teamName;
 
         RecyclerViewClickListener recyclerViewClickListener;
 
@@ -100,6 +105,17 @@ public class CompetitionsAdapter extends RecyclerView.Adapter<CompetitionsAdapte
         @Override
         public void onClick(View v) {
             recyclerViewClickListener.recyclerViewListClicked(v, getAdapterPosition());
+        }
+    }
+
+    class HeaderViewHolder extends RecyclerView.ViewHolder {
+
+        @BindView(R.id.header_name)
+        AutoResizeTextView headerName;
+
+        HeaderViewHolder(View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 }

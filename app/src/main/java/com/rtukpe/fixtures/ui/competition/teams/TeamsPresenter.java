@@ -1,9 +1,9 @@
-package com.rtukpe.fixtures.ui.competitions;
+package com.rtukpe.fixtures.ui.competition.teams;
 
 import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
 import com.rtukpe.fixtures.data.manager.DataManager;
-import com.rtukpe.fixtures.data.model.Competition;
+import com.rtukpe.fixtures.data.model.Team;
 import com.rtukpe.fixtures.ui.base.BasePresenter;
 import com.rtukpe.fixtures.utils.rx.SchedulerProvider;
 
@@ -13,10 +13,10 @@ import javax.inject.Inject;
 
 import io.reactivex.disposables.CompositeDisposable;
 
-public class CompetitionsPresenter<V extends CompetitionsMvpView> extends BasePresenter<V> implements CompetitionsMvpContract<V> {
+public class TeamsPresenter<V extends TeamsMvpView> extends BasePresenter<V> implements TeamsMvpContract<V> {
 
     @Inject
-    public CompetitionsPresenter(DataManager dataManager, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
+    public TeamsPresenter(DataManager dataManager, SchedulerProvider schedulerProvider, CompositeDisposable compositeDisposable) {
         super(dataManager, schedulerProvider, compositeDisposable);
     }
 
@@ -26,16 +26,18 @@ public class CompetitionsPresenter<V extends CompetitionsMvpView> extends BasePr
     }
 
     @Override
-    public void getCompetitions() {
+    public void getNotifications() {
         getCompositeDisposable().add(
                 getDataManager()
-                        .getCompetitions()
+                        .getMockTeams()
                         .subscribeOn(getSchedulerProvider().io())
                         .observeOn(getSchedulerProvider().ui())
-                        .subscribe(competitions -> {
-                            competitions = (ArrayList<Competition>) Stream.of(competitions).sortBy(competition -> competition.caption).collect(Collectors.toList());
-                            getMvpView().updateCompetitions(competitions);
+                        .subscribe(teamsResponse -> {
+                            ArrayList<Team> teams = teamsResponse.teams;
+                            teams = (ArrayList<Team>) Stream.of(teams).sortBy(team -> team.name).collect(Collectors.toList());
+                            getMvpView().updateTeams(teams);
                         })
+
         );
     }
 }

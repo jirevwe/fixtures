@@ -46,18 +46,18 @@ public class FixturesAdapter extends RecyclerView.Adapter<FixturesAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.homeTeamName.setText(fixtures.get(position).homeTeamName);
-        holder.awayTeamName.setText(fixtures.get(position).awayTeamName);
+        holder.homeTeamName.setText(fixtures.get(holder.getAdapterPosition()).homeTeamName);
+        holder.awayTeamName.setText(fixtures.get(holder.getAdapterPosition()).awayTeamName);
 
-        holder.homeTeamScore.setText(fixtures.get(position).result.goalsHomeTeam == -1 ?
-                "-" : String.valueOf(fixtures.get(position).result.goalsHomeTeam));
-        holder.awayTeamScore.setText(fixtures.get(position).result.goalsAwayTeam == -1 ?
-                "-" : String.valueOf(fixtures.get(position).result.goalsAwayTeam));
+        holder.homeTeamScore.setText(fixtures.get(holder.getAdapterPosition()).result.goalsHomeTeam == -1 ?
+                "-" : String.valueOf(fixtures.get(holder.getAdapterPosition()).result.goalsHomeTeam));
+        holder.awayTeamScore.setText(fixtures.get(holder.getAdapterPosition()).result.goalsAwayTeam == -1 ?
+                "-" : String.valueOf(fixtures.get(holder.getAdapterPosition()).result.goalsAwayTeam));
 
-        holder.matchDay.setText(String.format("MD: %s", String.valueOf(fixtures.get(position).matchday)));
-        holder.status.setText(fixtures.get(position).status);
-        holder.startTime.setText(new SimpleDateFormat("HH:mm", Locale.US).format(fixtures.get(position).date));
-        holder.minutes.setText(String.format("%s'", new SimpleDateFormat("mm", Locale.US).format(fixtures.get(position).date)));
+        holder.matchDay.setText(String.format("MD: %s", String.valueOf(fixtures.get(holder.getAdapterPosition()).matchday)));
+        holder.status.setText(fixtures.get(holder.getAdapterPosition()).status);
+        holder.startTime.setText(new SimpleDateFormat("HH:mm", Locale.US).format(fixtures.get(holder.getAdapterPosition()).date));
+        holder.minutes.setText(String.format("%s'", new SimpleDateFormat("mm", Locale.US).format(fixtures.get(holder.getAdapterPosition()).date)));
     }
 
     @Override

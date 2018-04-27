@@ -1,10 +1,9 @@
-package com.rtukpe.fixtures.ui.fixtures;
+package com.rtukpe.fixtures.ui.competition.teams;
+
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rtukpe.fixtures.R;
-import com.rtukpe.fixtures.data.model.Fixture;
+import com.rtukpe.fixtures.data.model.Team;
 import com.rtukpe.fixtures.di.component.ActivityComponent;
 import com.rtukpe.fixtures.ui.base.BaseFragment;
 
@@ -25,7 +24,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class FixturesFragment extends BaseFragment implements FixturesMvpView {
+public class TeamsFragment extends BaseFragment implements TeamsMvpView {
 
     @BindView(R.id.recylcer_view)
     RecyclerView recyclerView;
@@ -34,36 +33,29 @@ public class FixturesFragment extends BaseFragment implements FixturesMvpView {
     LinearLayoutManager mLinearLayoutManager;
 
     @Inject
-    GridLayoutManager mGridLayoutManager;
+    TeamsAdapter teamsAdapter;
 
     @Inject
-    DividerItemDecoration mDividerItemDecoration;
+    DividerItemDecoration dividerItemDecoration;
 
     @Inject
-    FixturesAdapter fixturesAdapter;
+    TeamsMvpContract<TeamsMvpView> mPresenter;
 
-    @Inject
-    FixturesMvpContract<FixturesMvpView> mPresenter;
-
-    public FixturesFragment() {
+    public TeamsFragment() {
 
     }
 
-    public static FixturesFragment newInstance() {
-        FixturesFragment fragment = new FixturesFragment();
+    public static TeamsFragment newInstance() {
+        TeamsFragment fragment = new TeamsFragment();
         Bundle args = new Bundle();
+
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_fixtures, container, false);
+        View view = inflater.inflate(R.layout.fragment_teams, container, false);
         ActivityComponent component = getActivityComponent();
         if (component != null) {
             component.inject(this);
@@ -84,12 +76,12 @@ public class FixturesFragment extends BaseFragment implements FixturesMvpView {
     protected void setUp(View view) {
         mPresenter.onViewInitialized();
 
-        mPresenter.getFixtures();
+        mPresenter.getNotifications();
 
-        recyclerView.setAdapter(fixturesAdapter);
+        recyclerView.setAdapter(teamsAdapter);
         recyclerView.setLayoutManager(mLinearLayoutManager);
-
-        fixturesAdapter.setRecyclerViewClickListener(this);
+        recyclerView.addItemDecoration(dividerItemDecoration);
+        teamsAdapter.setRecyclerViewClickListener(this);
     }
 
     @Override
@@ -98,12 +90,7 @@ public class FixturesFragment extends BaseFragment implements FixturesMvpView {
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
-    public void updateFixtures(ArrayList<Fixture> fixtures) {
-        fixturesAdapter.addFixtures(fixtures);
+    public void updateTeams(ArrayList<Team> teams) {
+        teamsAdapter.addTeams(teams);
     }
 }

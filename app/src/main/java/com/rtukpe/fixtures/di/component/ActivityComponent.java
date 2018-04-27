@@ -2,6 +2,8 @@ package com.rtukpe.fixtures.di.component;
 
 import com.rtukpe.fixtures.di.annotations.PerActivity;
 import com.rtukpe.fixtures.di.module.ActivityModule;
+import com.rtukpe.fixtures.ui.competition.CompetitionActivity;
+import com.rtukpe.fixtures.ui.competition.teams.TeamsFragment;
 import com.rtukpe.fixtures.ui.competitions.CompetitionsFragment;
 import com.rtukpe.fixtures.ui.fixtures.FixturesFragment;
 import com.rtukpe.fixtures.ui.home.DashboardActivity;
@@ -20,9 +22,13 @@ public interface ActivityComponent {
 
     void inject(DashboardActivity activity);
 
+    void inject(CompetitionActivity competitionActivity);
+
     // Fragments
 
-    void inject(CompetitionsFragment competitionsFragment);
+    void inject(TeamsFragment teamsFragment);
 
     void inject(FixturesFragment fixturesFragment);
+
+    void inject(CompetitionsFragment competitionsFragment);
 }
