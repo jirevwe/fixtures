@@ -6,7 +6,7 @@
     android:id="@+id/recylcer_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:clipToPadding="false"
     android:orientation="vertical"
-    app:layoutManager="android.support.v7.widget.LinearLayoutManager"
-    tools:listitem=""/>
+    app:layoutManager="android.support.v7.widget.GridLayoutManager"
+    app:spanCount="3"
+    tools:listitem="@layout/layout_team_item"/>

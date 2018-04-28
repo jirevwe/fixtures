@@ -23,8 +23,6 @@ import io.reactivex.Observable;
 @Singleton
 public class AppDataManager implements DataManager {
 
-    private static final String TAG = "AppDataManager";
-
     private Context mContext;
     private RemoteServiceHelper mRemoteServiceHelper;
     private MockHelper mMockHelper;
@@ -48,8 +46,13 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Observable<FixturesResponse> getFixtures(String timeFrame) {
-        return mRemoteServiceHelper.getFixtures(timeFrame);
+    public Observable<TeamsResponse> getCompetitionTeams(int id) {
+        return mRemoteServiceHelper.getCompetitionTeams(id);
+    }
+
+    @Override
+    public Observable<FixturesResponse> getFixtures(String timeFrameStart, String timeFrameEnd) {
+        return mRemoteServiceHelper.getFixtures(timeFrameStart, timeFrameEnd);
     }
 
     @Override

@@ -34,10 +34,10 @@ public final class ViewUtils {
         // This utility class is not publicly instantiable
     }
 
-    public static int calculateNoOfColumns(Context context) {
+    public static int calculateNoOfColumns(Context context, int width) {
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
-        return (int) (dpWidth / 128);
+        return (int) (dpWidth / width);
     }
 
     public static float pxToDp(float px) {

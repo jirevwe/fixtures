@@ -3,7 +3,7 @@ package com.rtukpe.fixtures.ui.competition.teams;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -16,6 +16,8 @@ import com.rtukpe.fixtures.R;
 import com.rtukpe.fixtures.data.model.Team;
 import com.rtukpe.fixtures.di.component.ActivityComponent;
 import com.rtukpe.fixtures.ui.base.BaseFragment;
+import com.rtukpe.fixtures.ui.competitions.CompetitionsFragment;
+import com.rtukpe.fixtures.utils.others.ItemOffsetDecoration;
 
 import java.util.ArrayList;
 
@@ -36,7 +38,7 @@ public class TeamsFragment extends BaseFragment implements TeamsMvpView {
     TeamsAdapter teamsAdapter;
 
     @Inject
-    DividerItemDecoration dividerItemDecoration;
+    GridLayoutManager gridLayoutManager;
 
     @Inject
     TeamsMvpContract<TeamsMvpView> mPresenter;
@@ -76,11 +78,18 @@ public class TeamsFragment extends BaseFragment implements TeamsMvpView {
     protected void setUp(View view) {
         mPresenter.onViewInitialized();
 
-        mPresenter.getNotifications();
+        int id = getBaseActivity().getIntent().getIntExtra(CompetitionsFragment.COMPETITION_ID, 0);
+        mPresenter.getTeams(id);
 
+//        ListPreloader.PreloadSizeProvider<Team> sizeProvider = new FixedPreloadSizeProvider<>(64, 64);
+//        BitmapPreloadModelProvider bitmapPreloadModelProvider = new BitmapPreloadModelProvider(getContext(), teamsAdapter.getTeams());
+//        PictureDrawablePreloadModelProvider pictureDrawablePreloadModelProvider = new PictureDrawablePreloadModelProvider(getBaseActivity(), teamsAdapter.getTeams());
+//        RecyclerViewPreloader<Team> preloader = new RecyclerViewPreloader<>(Glide.with(getBaseActivity()), pictureDrawablePreloadModelProvider, sizeProvider, 20 /*maxPreload*/);
+//        recyclerView.addOnScrollListener(preloader);
         recyclerView.setAdapter(teamsAdapter);
-        recyclerView.setLayoutManager(mLinearLayoutManager);
-        recyclerView.addItemDecoration(dividerItemDecoration);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(getBaseActivity(), R.dimen.item_offset);
+        recyclerView.addItemDecoration(itemDecoration);
         teamsAdapter.setRecyclerViewClickListener(this);
     }
 

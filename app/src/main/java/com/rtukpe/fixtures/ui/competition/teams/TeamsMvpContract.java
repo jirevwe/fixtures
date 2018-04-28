@@ -4,6 +4,6 @@ import com.rtukpe.fixtures.ui.base.MvpPresenter;
 
 public interface TeamsMvpContract<V extends TeamsMvpView> extends MvpPresenter<V> {
 
-    void getNotifications();
+    void getTeams(int id);
 
 }

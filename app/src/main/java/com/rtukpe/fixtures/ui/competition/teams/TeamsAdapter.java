@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.ListPreloader;
 import com.lb.auto_fit_textview.AutoResizeTextView;
 import com.rtukpe.fixtures.R;
 import com.rtukpe.fixtures.data.model.Team;
@@ -22,13 +23,22 @@ import butterknife.ButterKnife;
 
 public class TeamsAdapter extends RecyclerView.Adapter<TeamsAdapter.ViewHolder> {
 
+    private final int imageWidthPixels = 64;
+    private final int imageHeightPixels = 64;
     private ArrayList<Team> teams;
     private Context mContext;
     private RecyclerViewClickListener mRecyclerViewClickListener;
+    private ListPreloader.PreloadSizeProvider preloadSizeProvider;
+    private ArrayList<String> urls;
 
     public TeamsAdapter(@NonNull Context context) {
         this.mContext = context;
         this.teams = new ArrayList<>();
+        this.urls = new ArrayList<>();
+    }
+
+    public ArrayList<Team> getTeams() {
+        return teams;
     }
 
     public void setRecyclerViewClickListener(RecyclerViewClickListener mRecyclerViewClickListener) {
@@ -38,7 +48,7 @@ public class TeamsAdapter extends RecyclerView.Adapter<TeamsAdapter.ViewHolder> 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.layout_competition_item, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.layout_team_item, parent, false);
         return new ViewHolder(view, mRecyclerViewClickListener);
     }
 
@@ -47,7 +57,7 @@ public class TeamsAdapter extends RecyclerView.Adapter<TeamsAdapter.ViewHolder> 
         holder.teamName.setText(teams.get(holder.getAdapterPosition()).name);
         if (teams.get(holder.getAdapterPosition()).logo != null && teams.get(holder.getAdapterPosition()).logo.contains("svg")) {
             ImageUtils.loadSVG(mContext, teams.get(holder.getAdapterPosition()).logo, holder.teamLogo);
-        } else if (teams.get(holder.getAdapterPosition()).logo != null) {
+        } else {
             ImageUtils.displayImageFromUrl(mContext, teams.get(holder.getAdapterPosition()).logo, holder.teamLogo);
         }
     }

@@ -102,7 +102,7 @@ public class ActivityModule {
 
     @Provides
     GridLayoutManager provideGridLayoutManager(AppCompatActivity activity) {
-        return new GridLayoutManager(activity, 1);
+        return new GridLayoutManager(activity, 3);
     }
 
     @Provides

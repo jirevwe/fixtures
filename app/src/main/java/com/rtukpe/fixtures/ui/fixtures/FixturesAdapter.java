@@ -40,7 +40,7 @@ public class FixturesAdapter extends RecyclerView.Adapter<FixturesAdapter.ViewHo
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.layout_fixtures_item, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.layout_fixture_item, parent, false);
         return new ViewHolder(view, mRecyclerViewClickListener);
     }
 

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.rtukpe.fixtures.R;
@@ -18,6 +19,8 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+
+import static com.rtukpe.fixtures.ui.competitions.CompetitionsFragment.COMPETITION_NAME;
 
 public class CompetitionActivity extends BaseActivity implements CompetitionMvpView, TabLayout.OnTabSelectedListener {
 
@@ -56,6 +59,16 @@ public class CompetitionActivity extends BaseActivity implements CompetitionMvpV
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                break;
+        }
+        return true;
+    }
+
+    @Override
     public void showHideToolBar(boolean hide) {
         toolbar.setVisibility(hide ? View.GONE : View.VISIBLE);
     }
@@ -67,11 +80,14 @@ public class CompetitionActivity extends BaseActivity implements CompetitionMvpV
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        String name = getIntent().getStringExtra(COMPETITION_NAME);
+        toolbar.setTitle(name);
+
         mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.teams)));
-        mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.teams)));
+//        mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.teams)));
 
         mPagerAdapter.addFragment(TeamsFragment.newInstance(), getString(R.string.teams));
-        mPagerAdapter.addFragment(TeamsFragment.newInstance(), getString(R.string.teams));
+//        mPagerAdapter.addFragment(TeamsFragment.newInstance(), getString(R.string.teams));
 
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.setPagingEnabled(false);

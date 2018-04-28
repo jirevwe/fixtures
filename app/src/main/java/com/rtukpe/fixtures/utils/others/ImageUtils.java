@@ -64,27 +64,6 @@ public class ImageUtils {
         }
     }
 
-    public static void displayImageFromUrl(final Context context, @NonNull final String url, @NonNull final ImageView imageView) {
-        try {
-            final RequestOptions myOptions = new RequestOptions()
-                    .placeholder(R.drawable.champions_league32x32)
-                    .fitCenter()
-                    .centerCrop()
-                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                    .dontAnimate();
-
-            Glide.with(new WeakReference<>(context).get())
-                    .asBitmap()
-                    .apply(myOptions)
-                    .load(url)
-                    .into(imageView);
-        } catch (NullPointerException e) {
-
-        } catch (IllegalArgumentException e) {
-
-        }
-    }
-
     public static void loadImageForFullScreen(@NonNull final Context context, @NonNull String urlPhoto, @NonNull final ContentLoadingProgressBar progressBar, final ImageView imageView) {
         try {
             final RequestOptions myOptions = new RequestOptions()
@@ -157,7 +136,7 @@ public class ImageUtils {
                     .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                     .dontAnimate();
 
-            Glide.with(new WeakReference<>(context).get())
+            GlideApp.with(new WeakReference<>(context).get())
                     .asBitmap()
                     .apply(myOptions)
                     .load(url)
@@ -170,13 +149,36 @@ public class ImageUtils {
         }
     }
 
+    public static void displayImageFromUrl(final Context context, @NonNull final String url, @NonNull final ImageView imageView) {
+        try {
+            final RequestOptions myOptions = new RequestOptions()
+                    .placeholder(R.drawable.champions_league32x32)
+                    .fitCenter()
+                    .centerCrop()
+                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                    .dontAnimate();
+
+            GlideApp.with(new WeakReference<>(context).get())
+                    .asBitmap()
+                    .apply(myOptions)
+                    .load(url)
+                    .override(64, 64)
+                    .into(imageView);
+        } catch (NullPointerException e) {
+
+        } catch (IllegalArgumentException e) {
+
+        }
+    }
+
     public static void loadSVG(@NonNull final Context context, @NonNull final String uri, @NonNull final ImageView imageView) {
         RequestBuilder<PictureDrawable> requestBuilder = GlideApp.with(new WeakReference<>(context).get())
                 .as(PictureDrawable.class)
                 .placeholder(R.drawable.champions_league32x32)
-                .error(R.drawable.ic_close_24dp)
+                .error(R.drawable.champions_league32x32)
                 .transition(withCrossFade())
-                .listener(new SvgSoftwareLayerSetter());
+                .listener(new SvgSoftwareLayerSetter())
+                .override(64, 64);
         requestBuilder.load(uri).into(imageView);
     }
 }

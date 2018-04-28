@@ -2,6 +2,7 @@ package com.rtukpe.fixtures.data.repository.remote.helpers;
 
 import com.rtukpe.fixtures.data.model.Competition;
 import com.rtukpe.fixtures.data.model.FixturesResponse;
+import com.rtukpe.fixtures.data.model.TeamsResponse;
 import com.rtukpe.fixtures.data.repository.remote.api.RemoteServiceApi;
 import com.rtukpe.fixtures.data.repository.remote.helpers.base.BaseHelper;
 
@@ -30,7 +31,12 @@ public class RemoteServiceHelper extends BaseHelper implements RemoteServiceApi 
     }
 
     @Override
-    public Observable<FixturesResponse> getFixtures(String timeFrame) {
-        return mRemoteServiceApi.getFixtures(timeFrame);
+    public Observable<TeamsResponse> getCompetitionTeams(int id) {
+        return mRemoteServiceApi.getCompetitionTeams(id);
+    }
+
+    @Override
+    public Observable<FixturesResponse> getFixtures(String timeFrameStart, String timeFrameEnd) {
+        return mRemoteServiceApi.getFixtures(timeFrameStart, timeFrameEnd);
     }
 }

@@ -27,6 +27,9 @@ import butterknife.ButterKnife;
 
 public class CompetitionsFragment extends BaseFragment implements CompetitionsMvpView {
 
+    public static final String COMPETITION_ID = "CompetitionsFragment.COMPETITION_ID";
+    public static final String COMPETITION_NAME = "CompetitionsFragment.COMPETITION_NAME";
+
     @BindView(R.id.recylcer_view)
     RecyclerView recyclerView;
 
@@ -84,7 +87,8 @@ public class CompetitionsFragment extends BaseFragment implements CompetitionsMv
     @Override
     public void recyclerViewListClicked(View v, int position) {
         Intent intent = CompetitionActivity.getStartIntent(getBaseActivity());
-        intent.putExtra("COMPETITION", competitionsAdapter.getCompetitionAtPosition(position).id);
+        intent.putExtra(COMPETITION_ID, competitionsAdapter.getCompetitionAtPosition(position).id);
+        intent.putExtra(COMPETITION_NAME, competitionsAdapter.getCompetitionAtPosition(position).caption);
         startActivity(intent);
     }
 
