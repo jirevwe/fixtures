@@ -29,8 +29,8 @@ public class TeamsPresenter<V extends TeamsMvpView> extends BasePresenter<V> imp
     public void getTeams(int id) {
         getCompositeDisposable().add(
                 getDataManager()
-                        //.getMockTeams()
-                        .getCompetitionTeams(id)
+                        .getMockTeams()
+//                        .getCompetitionTeams(id)
                         .subscribeOn(getSchedulerProvider().io())
                         .observeOn(getSchedulerProvider().ui())
                         .subscribe(teamsResponse -> {

@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.rtukpe.fixtures.data.model.Competition;
 import com.rtukpe.fixtures.data.model.FixturesResponse;
+import com.rtukpe.fixtures.data.model.LeagueTable;
 import com.rtukpe.fixtures.data.model.TeamsResponse;
 import com.rtukpe.fixtures.data.repository.mock.MockHelper;
 import com.rtukpe.fixtures.data.repository.remote.helpers.RemoteServiceHelper;
@@ -51,17 +52,37 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public Observable<LeagueTable> getCompetitionTable(int id) {
+        return mRemoteServiceHelper.getCompetitionTable(id);
+    }
+
+    @Override
+    public Observable<FixturesResponse> getCompetitionFixtures(int id, String timeFrameStart, String timeFrameEnd) {
+        return mRemoteServiceHelper.getCompetitionFixtures(id, timeFrameStart, timeFrameEnd);
+    }
+
+    @Override
     public Observable<FixturesResponse> getFixtures(String timeFrameStart, String timeFrameEnd) {
         return mRemoteServiceHelper.getFixtures(timeFrameStart, timeFrameEnd);
     }
 
     @Override
-    public Observable<FixturesResponse> getMockFixtures() {
-        return mMockHelper.getMockFixtures();
+    public Observable<LeagueTable> getMockCompetitionTable() {
+        return mMockHelper.getMockCompetitionTable();
+    }
+
+    @Override
+    public Observable<FixturesResponse> getMockFixtures(String timeFrameStart, String timeFrameEnd) {
+        return mMockHelper.getMockFixtures(timeFrameStart, timeFrameEnd);
     }
 
     @Override
     public Observable<TeamsResponse> getMockTeams() {
         return mMockHelper.getMockTeams();
+    }
+
+    @Override
+    public Observable<ArrayList<Competition>> getMockCompetitions() {
+        return mMockHelper.getMockCompetitions();
     }
 }

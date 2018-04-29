@@ -1,4 +1,4 @@
-package com.rtukpe.fixtures.ui.fixtures;
+package com.rtukpe.fixtures.ui.competition.fixtures;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -23,7 +23,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class FixturesFragment extends BaseFragment implements FixturesMvpView {
+public class CompetitionFixturesFragment extends BaseFragment implements CompetitionFixturesMvpView {
 
     @BindView(R.id.recylcer_view)
     RecyclerView recyclerView;
@@ -32,17 +32,17 @@ public class FixturesFragment extends BaseFragment implements FixturesMvpView {
     LinearLayoutManager mLinearLayoutManager;
 
     @Inject
-    FixturesAdapter fixturesAdapter;
+    CompetitionFixturesAdapter competitionFixturesAdapter;
 
     @Inject
-    FixturesMvpContract<FixturesMvpView> mPresenter;
+    CompetitionFixturesMvpContract<CompetitionFixturesMvpView> mPresenter;
 
-    public FixturesFragment() {
+    public CompetitionFixturesFragment() {
 
     }
 
-    public static FixturesFragment newInstance() {
-        FixturesFragment fragment = new FixturesFragment();
+    public static CompetitionFixturesFragment newInstance() {
+        CompetitionFixturesFragment fragment = new CompetitionFixturesFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -78,10 +78,10 @@ public class FixturesFragment extends BaseFragment implements FixturesMvpView {
 
         mPresenter.getFixtures();
 
-        recyclerView.setAdapter(fixturesAdapter);
+        recyclerView.setAdapter(competitionFixturesAdapter);
         recyclerView.setLayoutManager(mLinearLayoutManager);
 
-        fixturesAdapter.setRecyclerViewClickListener(this);
+        competitionFixturesAdapter.setRecyclerViewClickListener(this);
     }
 
     @Override
@@ -96,6 +96,6 @@ public class FixturesFragment extends BaseFragment implements FixturesMvpView {
 
     @Override
     public void updateFixtures(ArrayList<Fixture> fixtures) {
-        fixturesAdapter.addFixtures(fixtures);
+        competitionFixturesAdapter.addFixtures(fixtures);
     }
 }

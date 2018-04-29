@@ -23,4 +23,9 @@
     <string name="fixture_match_day_ph">EPL 20</string>
     <string name="title_activity_competition">Competition</string>
     <string name="teams">Teams</string>
+    <string name="table">Table</string>
+    <string name="one">1</string>
+    <string name="away_team_name_ph">Manchester Utd</string>
+    <string name="home_team_name_ph">Arsenal</string>
+    <string name="two">2</string>
 </resources>

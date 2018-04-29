@@ -12,6 +12,14 @@ import com.rtukpe.fixtures.ui.competition.CompetitionMvpContract;
 import com.rtukpe.fixtures.ui.competition.CompetitionMvpView;
 import com.rtukpe.fixtures.ui.competition.CompetitionPagerAdapter;
 import com.rtukpe.fixtures.ui.competition.CompetitionPresenter;
+import com.rtukpe.fixtures.ui.competition.fixtures.CompetitionFixturesAdapter;
+import com.rtukpe.fixtures.ui.competition.fixtures.CompetitionFixturesMvpContract;
+import com.rtukpe.fixtures.ui.competition.fixtures.CompetitionFixturesMvpView;
+import com.rtukpe.fixtures.ui.competition.fixtures.CompetitionFixturesPresenter;
+import com.rtukpe.fixtures.ui.competition.table.TableAdapter;
+import com.rtukpe.fixtures.ui.competition.table.TableMvpContract;
+import com.rtukpe.fixtures.ui.competition.table.TableMvpView;
+import com.rtukpe.fixtures.ui.competition.table.TablePresenter;
 import com.rtukpe.fixtures.ui.competition.teams.TeamsAdapter;
 import com.rtukpe.fixtures.ui.competition.teams.TeamsMvpContract;
 import com.rtukpe.fixtures.ui.competition.teams.TeamsMvpView;
@@ -86,12 +94,22 @@ public class ActivityModule {
     }
 
     @Provides
+    CompetitionFixturesMvpContract<CompetitionFixturesMvpView> provideCompetitionFixturesPresenter(CompetitionFixturesPresenter<CompetitionFixturesMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
     CompetitionsMvpContract<CompetitionsMvpView> provideCompetitionsMvpPresenter(CompetitionsPresenter<CompetitionsMvpView> presenter) {
         return presenter;
     }
 
     @Provides
     TeamsMvpContract<TeamsMvpView> provideTeamsMvpPresenter(TeamsPresenter<TeamsMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
+    TableMvpContract<TableMvpView> provideTableMvpPresenter(TablePresenter<TableMvpView> presenter) {
         return presenter;
     }
 
@@ -116,6 +134,11 @@ public class ActivityModule {
     }
 
     @Provides
+    TableAdapter provideTableAdapter(AppCompatActivity activity) {
+        return new TableAdapter(activity);
+    }
+
+    @Provides
     CompetitionsAdapter provideCompetitionsAdapter(AppCompatActivity activity) {
         return new CompetitionsAdapter(activity);
     }
@@ -123,6 +146,11 @@ public class ActivityModule {
     @Provides
     CompetitionPagerAdapter provideCompetitionPagerAdapter(AppCompatActivity activity) {
         return new CompetitionPagerAdapter(activity.getSupportFragmentManager());
+    }
+
+    @Provides
+    CompetitionFixturesAdapter provideCompetitionFixturesAdapter(AppCompatActivity activity) {
+        return new CompetitionFixturesAdapter(activity);
     }
 
     @Provides

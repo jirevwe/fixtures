@@ -29,7 +29,7 @@ public class CompetitionsPresenter<V extends CompetitionsMvpView> extends BasePr
     public void getCompetitions() {
         getCompositeDisposable().add(
                 getDataManager()
-                        .getCompetitions()
+                        .getMockCompetitions()
                         .subscribeOn(getSchedulerProvider().io())
                         .observeOn(getSchedulerProvider().ui())
                         .subscribe(competitions -> {

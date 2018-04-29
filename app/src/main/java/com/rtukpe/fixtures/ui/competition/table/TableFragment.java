@@ -1,4 +1,4 @@
-package com.rtukpe.fixtures.ui.fixtures;
+package com.rtukpe.fixtures.ui.competition.table;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,7 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.rtukpe.fixtures.R;
-import com.rtukpe.fixtures.data.model.Fixture;
+import com.rtukpe.fixtures.data.model.LeagueTable;
 import com.rtukpe.fixtures.di.component.ActivityComponent;
 import com.rtukpe.fixtures.ui.base.BaseFragment;
 
@@ -23,7 +23,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class FixturesFragment extends BaseFragment implements FixturesMvpView {
+public class TableFragment extends BaseFragment implements TableMvpView {
 
     @BindView(R.id.recylcer_view)
     RecyclerView recyclerView;
@@ -32,17 +32,17 @@ public class FixturesFragment extends BaseFragment implements FixturesMvpView {
     LinearLayoutManager mLinearLayoutManager;
 
     @Inject
-    FixturesAdapter fixturesAdapter;
+    TableAdapter tableAdapter;
 
     @Inject
-    FixturesMvpContract<FixturesMvpView> mPresenter;
+    TableMvpContract<TableMvpView> mPresenter;
 
-    public FixturesFragment() {
+    public TableFragment() {
 
     }
 
-    public static FixturesFragment newInstance() {
-        FixturesFragment fragment = new FixturesFragment();
+    public static TableFragment newInstance() {
+        TableFragment fragment = new TableFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -76,12 +76,12 @@ public class FixturesFragment extends BaseFragment implements FixturesMvpView {
     protected void setUp(View view) {
         mPresenter.onViewInitialized();
 
-        mPresenter.getFixtures();
+        mPresenter.getCompetitionsTable();
 
-        recyclerView.setAdapter(fixturesAdapter);
+        recyclerView.setAdapter(tableAdapter);
         recyclerView.setLayoutManager(mLinearLayoutManager);
 
-        fixturesAdapter.setRecyclerViewClickListener(this);
+        tableAdapter.setRecyclerViewClickListener(this);
     }
 
     @Override
@@ -95,7 +95,7 @@ public class FixturesFragment extends BaseFragment implements FixturesMvpView {
     }
 
     @Override
-    public void updateFixtures(ArrayList<Fixture> fixtures) {
-        fixturesAdapter.addFixtures(fixtures);
+    public void updateTableStandings(ArrayList<LeagueTable.Standing> standings) {
+        tableAdapter.addStandings(standings);
     }
 }

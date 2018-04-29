@@ -11,6 +11,8 @@ import android.view.View;
 
 import com.rtukpe.fixtures.R;
 import com.rtukpe.fixtures.ui.base.BaseActivity;
+import com.rtukpe.fixtures.ui.competition.fixtures.CompetitionFixturesFragment;
+import com.rtukpe.fixtures.ui.competition.table.TableFragment;
 import com.rtukpe.fixtures.ui.competition.teams.TeamsFragment;
 import com.rtukpe.fixtures.utils.others.widgets.CustomViewPager;
 
@@ -83,11 +85,13 @@ public class CompetitionActivity extends BaseActivity implements CompetitionMvpV
         String name = getIntent().getStringExtra(COMPETITION_NAME);
         toolbar.setTitle(name);
 
+        mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.table)));
+        mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.fixtures)));
         mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.teams)));
-//        mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.teams)));
 
+        mPagerAdapter.addFragment(TableFragment.newInstance(), getString(R.string.table));
+        mPagerAdapter.addFragment(CompetitionFixturesFragment.newInstance(), getString(R.string.fixtures));
         mPagerAdapter.addFragment(TeamsFragment.newInstance(), getString(R.string.teams));
-//        mPagerAdapter.addFragment(TeamsFragment.newInstance(), getString(R.string.teams));
 
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.setPagingEnabled(false);
