@@ -3,6 +3,7 @@ package com.rtukpe.fixtures.ui.competition.table;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import com.rtukpe.fixtures.R;
 import com.rtukpe.fixtures.data.model.LeagueTable;
 import com.rtukpe.fixtures.di.component.ActivityComponent;
 import com.rtukpe.fixtures.ui.base.BaseFragment;
+import com.rtukpe.fixtures.ui.competitions.CompetitionsFragment;
 
 import java.util.ArrayList;
 
@@ -30,6 +32,9 @@ public class TableFragment extends BaseFragment implements TableMvpView {
 
     @Inject
     LinearLayoutManager mLinearLayoutManager;
+
+    @Inject
+    DividerItemDecoration mDividerItemDecoration;
 
     @Inject
     TableAdapter tableAdapter;
@@ -76,10 +81,12 @@ public class TableFragment extends BaseFragment implements TableMvpView {
     protected void setUp(View view) {
         mPresenter.onViewInitialized();
 
-        mPresenter.getCompetitionsTable();
+        int id = getBaseActivity().getIntent().getIntExtra(CompetitionsFragment.COMPETITION_ID, 0);
+        mPresenter.getCompetitionsTable(id);
 
         recyclerView.setAdapter(tableAdapter);
         recyclerView.setLayoutManager(mLinearLayoutManager);
+        recyclerView.addItemDecoration(mDividerItemDecoration);
 
         tableAdapter.setRecyclerViewClickListener(this);
     }

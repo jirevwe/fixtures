@@ -15,6 +15,7 @@ import com.rtukpe.fixtures.R;
 import com.rtukpe.fixtures.data.model.Fixture;
 import com.rtukpe.fixtures.di.component.ActivityComponent;
 import com.rtukpe.fixtures.ui.base.BaseFragment;
+import com.rtukpe.fixtures.ui.competitions.CompetitionsFragment;
 
 import java.util.ArrayList;
 
@@ -76,7 +77,8 @@ public class CompetitionFixturesFragment extends BaseFragment implements Competi
     protected void setUp(View view) {
         mPresenter.onViewInitialized();
 
-        mPresenter.getFixtures();
+        int id = getBaseActivity().getIntent().getIntExtra(CompetitionsFragment.COMPETITION_ID, 0);
+        mPresenter.getFixtures(id);
 
         recyclerView.setAdapter(competitionFixturesAdapter);
         recyclerView.setLayoutManager(mLinearLayoutManager);

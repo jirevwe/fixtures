@@ -21,9 +21,9 @@ public class TablePresenter<V extends TableMvpView> extends BasePresenter<V> imp
     }
 
     @Override
-    public void getCompetitionsTable() {
+    public void getCompetitionsTable(int id) {
         getCompositeDisposable().add(
-                getDataManager().getMockCompetitionTable()
+                getDataManager().getCompetitionTable(id)
                         .subscribeOn(getSchedulerProvider().io())
                         .observeOn(getSchedulerProvider().ui())
                         .subscribe(leagueTable -> getMvpView().updateTableStandings(leagueTable.standing))

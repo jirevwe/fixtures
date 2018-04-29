@@ -36,7 +36,7 @@ public class FixturesPresenter<V extends FixturesMvpView> extends BasePresenter<
 //                .subscribe(fixturesResponse -> getMvpView().updateTableStandings(fixturesResponse.fixtures));
         String date = new SimpleDateFormat("yyyy-MM-dd", Locale.FRANCE).format(new Date(System.currentTimeMillis()));
         getCompositeDisposable().add(
-                getDataManager().getMockFixtures(date, date)
+                getDataManager().getFixtures(date, date)
                         .subscribeOn(getSchedulerProvider().io())
                         .observeOn(getSchedulerProvider().ui())
                         .subscribe(fixturesResponse -> getMvpView().updateFixtures(fixturesResponse.fixtures))

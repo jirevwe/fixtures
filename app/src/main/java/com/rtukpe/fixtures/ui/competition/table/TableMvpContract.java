@@ -4,6 +4,6 @@ import com.rtukpe.fixtures.ui.base.MvpPresenter;
 
 public interface TableMvpContract<V extends TableMvpView> extends MvpPresenter<V> {
 
-    void getCompetitionsTable();
+    void getCompetitionsTable(int id);
 
 }

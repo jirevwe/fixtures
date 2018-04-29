@@ -14,6 +14,7 @@ import com.rtukpe.fixtures.ui.base.BaseActivity;
 import com.rtukpe.fixtures.ui.competition.fixtures.CompetitionFixturesFragment;
 import com.rtukpe.fixtures.ui.competition.table.TableFragment;
 import com.rtukpe.fixtures.ui.competition.teams.TeamsFragment;
+import com.rtukpe.fixtures.ui.competitions.CompetitionsFragment;
 import com.rtukpe.fixtures.utils.others.widgets.CustomViewPager;
 
 import javax.inject.Inject;
@@ -85,11 +86,17 @@ public class CompetitionActivity extends BaseActivity implements CompetitionMvpV
         String name = getIntent().getStringExtra(COMPETITION_NAME);
         toolbar.setTitle(name);
 
-        mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.table)));
+        int id = getIntent().getIntExtra(CompetitionsFragment.COMPETITION_ID, 0);
+
+        if (id != 464 && id != 458) {
+            mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.table)));
+        }
         mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.fixtures)));
         mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.teams)));
 
-        mPagerAdapter.addFragment(TableFragment.newInstance(), getString(R.string.table));
+        if (id != 464 && id != 458) {
+            mPagerAdapter.addFragment(TableFragment.newInstance(), getString(R.string.table));
+        }
         mPagerAdapter.addFragment(CompetitionFixturesFragment.newInstance(), getString(R.string.fixtures));
         mPagerAdapter.addFragment(TeamsFragment.newInstance(), getString(R.string.teams));
 

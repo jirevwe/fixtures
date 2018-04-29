@@ -25,7 +25,8 @@
     <string name="teams">Teams</string>
     <string name="table">Table</string>
     <string name="one">1</string>
-    <string name="away_team_name_ph">Manchester Utd</string>
+    <string name="away_team_name_ph">Manchester United FC</string>
     <string name="home_team_name_ph">Arsenal</string>
     <string name="two">2</string>
+    <string name="twelve">12</string>
 </resources>

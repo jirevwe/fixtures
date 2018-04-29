@@ -25,10 +25,10 @@ public class CompetitionFixturesPresenter<V extends CompetitionFixturesMvpView> 
     }
 
     @Override
-    public void getFixtures() {
+    public void getFixtures(int id) {
         String date = new SimpleDateFormat("yyyy-MM-dd", Locale.FRANCE).format(new Date(System.currentTimeMillis()));
         getCompositeDisposable().add(
-                getDataManager().getMockFixtures(date, date)
+                getDataManager().getCompetitionFixtures(id, date, date)
                         .subscribeOn(getSchedulerProvider().io())
                         .observeOn(getSchedulerProvider().ui())
                         .subscribe(fixturesResponse -> getMvpView().updateFixtures(fixturesResponse.fixtures))

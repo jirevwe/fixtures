@@ -6,14 +6,18 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.rtukpe.fixtures.R;
 import com.rtukpe.fixtures.data.model.LeagueTable;
+import com.rtukpe.fixtures.utils.others.ImageUtils;
 import com.rtukpe.fixtures.utils.others.RecyclerViewClickListener;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class TableAdapter extends RecyclerView.Adapter<TableAdapter.ViewHolder> {
@@ -21,6 +25,7 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.ViewHolder> 
     private ArrayList<LeagueTable.Standing> standings;
     private Context mContext;
     private RecyclerViewClickListener mRecyclerViewClickListener;
+
     public TableAdapter(@NonNull Context context) {
         this.mContext = context;
         this.standings = new ArrayList<>();
@@ -37,13 +42,22 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.ViewHolder> 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.layout_fixture_item, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.layout_table_standing_item, parent, false);
         return new ViewHolder(view, mRecyclerViewClickListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
+        holder.standingName.setText(standings.get(holder.getAdapterPosition()).team);
+        holder.standingIndex.setText(String.valueOf(standings.get(holder.getAdapterPosition()).rank));
+        holder.standingPoints.setText(String.valueOf(standings.get(holder.getAdapterPosition()).points));
+        holder.standingPlayed.setText(String.valueOf(standings.get(holder.getAdapterPosition()).playedGames));
+        holder.standingGoalDifference.setText(String.valueOf(standings.get(holder.getAdapterPosition()).goalDifference));
+        if (standings.get(holder.getAdapterPosition()).logo != null && standings.get(holder.getAdapterPosition()).logo.contains("svg")) {
+            ImageUtils.loadSVG(mContext, standings.get(holder.getAdapterPosition()).logo, holder.standingLogo);
+        } else {
+            ImageUtils.displayImageFromUrl(mContext, standings.get(holder.getAdapterPosition()).logo, holder.standingLogo);
+        }
     }
 
     @Override
@@ -79,6 +93,24 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.ViewHolder> 
     }
 
     protected class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        @BindView(R.id.standing_index)
+        TextView standingIndex;
+
+        @BindView(R.id.standing_logo)
+        ImageView standingLogo;
+
+        @BindView(R.id.standing_name)
+        TextView standingName;
+
+        @BindView(R.id.standing_played)
+        TextView standingPlayed;
+
+        @BindView(R.id.standing_goal_diff)
+        TextView standingGoalDifference;
+
+        @BindView(R.id.standing_points)
+        TextView standingPoints;
 
         RecyclerViewClickListener recyclerViewClickListener;
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -7,23 +7,104 @@
     android:orientation="horizontal">
 
     <TextView
-        android:id="@+id/competition.name"
-        android:layout_width="wrap_content"
-        android:layout_height="32dp"
+        android:id="@+id/standing.index"
+        android:layout_width="16dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="16dp"
-        android:gravity="start|center"
+        android:gravity="center"
         android:lines="1"
         android:text="@string/one"
         android:textColor="@color/black"
-        android:textSize="12sp"/>
+        android:textSize="14sp"/>
 
     <ImageView
+        android:id="@+id/standing.logo"
         android:layout_width="32dp"
         android:layout_height="32dp"
+        android:layout_toEndOf="@id/standing.index"
+        android:layout_toRightOf="@id/standing.index"
+        android:contentDescription="@string/team_logo"
         android:padding="8dp"
         app:srcCompat="@drawable/arsenal32x27"/>
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/standing.name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
+        android:layout_marginBottom="4dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_toEndOf="@id/standing.logo"
+        android:layout_toRightOf="@id/standing.logo"
+        android:lines="1"
+        android:text="@string/away_team_name_ph"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/standing.played"
+        android:layout_width="16dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
+        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_toLeftOf="@id/standing.goal.diff"
+        android:layout_toStartOf="@id/standing.goal.diff"
+        android:gravity="center"
+        android:lines="1"
+        android:maxLength="20"
+        android:text="@string/twelve"
+        android:textColor="@color/black"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/standing.goal.diff"
+        android:layout_width="16dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
+        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_toLeftOf="@id/standing.points"
+        android:layout_toStartOf="@id/standing.points"
+        android:gravity="center"
+        android:lines="1"
+        android:maxLength="20"
+        android:text="@string/twelve"
+        android:textColor="@color/black"
+        android:textSize="14sp"/>
+
+    <TextView
+        android:id="@+id/standing.points"
+        android:layout_width="16dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
+        android:layout_marginBottom="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:lines="1"
+        android:maxLength="20"
+        android:text="@string/twelve"
+        android:textColor="@color/black"
+        android:textSize="14sp"/>
+
+</RelativeLayout>
