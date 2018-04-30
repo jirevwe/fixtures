@@ -106,6 +106,7 @@ public class CompetitionActivity extends BaseActivity implements CompetitionMvpV
 
         mViewPager.setAdapter(mPagerAdapter);
         mViewPager.setPagingEnabled(false);
+        mViewPager.setOffscreenPageLimit(mPagerAdapter.getCount());
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
         mTabLayout.addOnTabSelectedListener(this);
     }

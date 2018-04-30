@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -35,6 +36,9 @@ public class FixturesFragment extends BaseFragment implements FixturesMvpView,
 
     @Inject
     FixturesAdapter fixturesAdapter;
+
+    @Inject
+    DividerItemDecoration mDividerItemDecoration;
 
     @Inject
     FixturesMvpContract<FixturesMvpView> mPresenter;
@@ -82,6 +86,7 @@ public class FixturesFragment extends BaseFragment implements FixturesMvpView,
 
         recyclerView.setAdapter(fixturesAdapter);
         recyclerView.setLayoutManager(mLinearLayoutManager);
+        recyclerView.addItemDecoration(mDividerItemDecoration);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         fixturesAdapter.setOnRetryClickedListener(this);

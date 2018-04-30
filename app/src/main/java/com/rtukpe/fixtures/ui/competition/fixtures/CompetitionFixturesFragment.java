@@ -3,6 +3,7 @@ package com.rtukpe.fixtures.ui.competition.fixtures;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -31,6 +32,9 @@ public class CompetitionFixturesFragment extends BaseFragment implements Competi
 
     @Inject
     LinearLayoutManager mLinearLayoutManager;
+
+    @Inject
+    DividerItemDecoration mDividerItemDecoration;
 
     @Inject
     CompetitionFixturesAdapter competitionFixturesAdapter;
@@ -81,6 +85,7 @@ public class CompetitionFixturesFragment extends BaseFragment implements Competi
         mPresenter.getFixtures(id);
 
         recyclerView.setAdapter(competitionFixturesAdapter);
+        recyclerView.addItemDecoration(mDividerItemDecoration);
         recyclerView.setLayoutManager(mLinearLayoutManager);
 
         competitionFixturesAdapter.setRecyclerViewClickListener(this);
