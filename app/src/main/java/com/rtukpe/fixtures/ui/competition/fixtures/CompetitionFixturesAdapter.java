@@ -12,6 +12,8 @@ import android.widget.TextView;
 import com.lb.auto_fit_textview.AutoResizeTextView;
 import com.rtukpe.fixtures.R;
 import com.rtukpe.fixtures.data.model.Fixture;
+import com.rtukpe.fixtures.ui.base.BaseViewHolder;
+import com.rtukpe.fixtures.utils.others.AppUtils;
 import com.rtukpe.fixtures.utils.others.RecyclerViewClickListener;
 
 import java.text.SimpleDateFormat;
@@ -21,16 +23,25 @@ import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class CompetitionFixturesAdapter extends RecyclerView.Adapter<CompetitionFixturesAdapter.ViewHolder> {
+public class CompetitionFixturesAdapter extends RecyclerView.Adapter<BaseViewHolder> {
+
+    private static final int VIEW_TYPE_NORMAL = 1;
+    private static final int VIEW_TYPE_EMPTY = 0;
 
     private ArrayList<Fixture> fixtures;
     private Context mContext;
     private RecyclerViewClickListener mRecyclerViewClickListener;
+    private OnRetryClicked onRetryClickedListener;
 
     public CompetitionFixturesAdapter(@NonNull Context context) {
         this.mContext = context;
         this.fixtures = new ArrayList<>();
+    }
+
+    public void setOnRetryClickedListener(OnRetryClicked onRetryClickedListener) {
+        this.onRetryClickedListener = onRetryClickedListener;
     }
 
     public void setRecyclerViewClickListener(RecyclerViewClickListener mRecyclerViewClickListener) {
@@ -39,30 +50,40 @@ public class CompetitionFixturesAdapter extends RecyclerView.Adapter<Competition
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.layout_fixture_item, parent, false);
-        return new ViewHolder(view, mRecyclerViewClickListener);
+    public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        switch (viewType) {
+            case VIEW_TYPE_NORMAL:
+                View view = LayoutInflater.from(mContext).inflate(R.layout.layout_fixture_item, parent, false);
+                return new ViewHolder(view, mRecyclerViewClickListener);
+            case VIEW_TYPE_EMPTY:
+            default:
+                view = LayoutInflater.from(mContext).inflate(R.layout.layout_empty_view, parent, false);
+                return new EmptyViewHolder(view, mRecyclerViewClickListener);
+        }
+
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.homeTeamName.setText(fixtures.get(holder.getAdapterPosition()).homeTeamName);
-        holder.awayTeamName.setText(fixtures.get(holder.getAdapterPosition()).awayTeamName);
+    public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
+        holder.onBind(position);
+    }
 
-        holder.homeTeamScore.setText(fixtures.get(holder.getAdapterPosition()).result.goalsHomeTeam == -1 ?
-                "-" : String.valueOf(fixtures.get(holder.getAdapterPosition()).result.goalsHomeTeam));
-        holder.awayTeamScore.setText(fixtures.get(holder.getAdapterPosition()).result.goalsAwayTeam == -1 ?
-                "-" : String.valueOf(fixtures.get(holder.getAdapterPosition()).result.goalsAwayTeam));
-
-        holder.matchDay.setText(String.format("MD: %s", String.valueOf(fixtures.get(holder.getAdapterPosition()).matchday)));
-        holder.status.setText(fixtures.get(holder.getAdapterPosition()).status);
-        holder.startTime.setText(new SimpleDateFormat("HH:mm", Locale.US).format(fixtures.get(holder.getAdapterPosition()).date));
-        holder.minutes.setText(String.format("%s'", new SimpleDateFormat("mm", Locale.US).format(fixtures.get(holder.getAdapterPosition()).date)));
+    @Override
+    public int getItemViewType(int position) {
+        if (fixtures != null && fixtures.size() > 0) {
+            return VIEW_TYPE_NORMAL;
+        } else {
+            return VIEW_TYPE_EMPTY;
+        }
     }
 
     @Override
     public int getItemCount() {
-        return fixtures.size();
+        if (fixtures != null && fixtures.size() > 0) {
+            return fixtures.size();
+        } else {
+            return 1;
+        }
     }
 
     public Fixture getFixtureAtPosition(int position) {
@@ -92,7 +113,11 @@ public class CompetitionFixturesAdapter extends RecyclerView.Adapter<Competition
         notifyDataSetChanged();
     }
 
-    protected class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    interface OnRetryClicked {
+        void onRetryClicked();
+    }
+
+    protected class ViewHolder extends BaseViewHolder implements View.OnClickListener {
 
         @BindView(R.id.fixture_home_team_logo)
         ImageView homeTeamLogo;
@@ -135,8 +160,66 @@ public class CompetitionFixturesAdapter extends RecyclerView.Adapter<Competition
         }
 
         @Override
+        public void onBind(int position) {
+            super.onBind(position);
+
+            homeTeamName.setText(fixtures.get(getAdapterPosition()).homeTeamName);
+            awayTeamName.setText(fixtures.get(getAdapterPosition()).awayTeamName);
+
+            homeTeamScore.setText(fixtures.get(getAdapterPosition()).result.goalsHomeTeam == -1 ?
+                    "-" : String.valueOf(fixtures.get(getAdapterPosition()).result.goalsHomeTeam));
+            awayTeamScore.setText(fixtures.get(getAdapterPosition()).result.goalsAwayTeam == -1 ?
+                    "-" : String.valueOf(fixtures.get(getAdapterPosition()).result.goalsAwayTeam));
+
+            matchDay.setText(String.format("MD: %s", String.valueOf(fixtures.get(getAdapterPosition()).matchday)));
+            status.setText(fixtures.get(getAdapterPosition()).status);
+            startTime.setText(new SimpleDateFormat("HH:mm", Locale.US).format(fixtures.get(getAdapterPosition()).date));
+            minutes.setText(String.format("%s'", new SimpleDateFormat("mm", Locale.US).format(fixtures.get(getAdapterPosition()).date)));
+        }
+
+        @Override
         public void onClick(View v) {
             recyclerViewClickListener.recyclerViewListClicked(v, getAdapterPosition());
+        }
+    }
+
+    class EmptyViewHolder extends BaseViewHolder {
+
+        @BindView(R.id.error_no_internet)
+        ImageView errorNoInternet;
+
+        @BindView(R.id.error_no_items)
+        ImageView errorNoItems;
+
+        @BindView(R.id.error_text)
+        TextView errorText;
+
+        RecyclerViewClickListener recyclerViewClickListener;
+
+        EmptyViewHolder(View itemView, RecyclerViewClickListener recyclerViewClickListener) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+            this.recyclerViewClickListener = recyclerViewClickListener;
+        }
+
+        @Override
+        public void onBind(int position) {
+            super.onBind(position);
+
+            if (AppUtils.hasInternetConnection(mContext)) {
+                errorNoItems.setVisibility(View.VISIBLE);
+                errorNoInternet.setVisibility(View.GONE);
+                errorText.setText(mContext.getResources().getString(R.string.empty));
+            } else {
+                errorNoInternet.setVisibility(View.VISIBLE);
+                errorNoItems.setVisibility(View.GONE);
+                errorText.setText(mContext.getResources().getString(R.string.offline));
+            }
+        }
+
+        @OnClick(R.id.retry)
+        void onRetryClick() {
+            if (onRetryClickedListener != null) onRetryClickedListener.onRetryClicked();
         }
     }
 }

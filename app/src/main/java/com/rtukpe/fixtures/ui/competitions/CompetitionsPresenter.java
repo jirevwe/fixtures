@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 
 import io.reactivex.disposables.CompositeDisposable;
+import timber.log.Timber;
 
 public class CompetitionsPresenter<V extends CompetitionsMvpView> extends BasePresenter<V> implements CompetitionsMvpContract<V> {
 
@@ -35,7 +36,7 @@ public class CompetitionsPresenter<V extends CompetitionsMvpView> extends BasePr
                         .subscribe(competitions -> {
                             competitions = (ArrayList<Competition>) Stream.of(competitions).sortBy(competition -> competition.caption).collect(Collectors.toList());
                             getMvpView().updateCompetitions(competitions);
-                        })
+                        }, Timber::e)
         );
     }
 }

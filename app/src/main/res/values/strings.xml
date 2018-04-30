@@ -33,4 +33,8 @@
     <string name="player_name_ph">Romelu Lukaku</string>
     <string name="team_player_country_ph">Belgium</string>
     <string name="team_player_position_ph">Centre-Forward</string>
+    <string name="retry">Retry</string>
+    <string name="offline">No internet connection found</string>
+    <string name="empty">No fixtures</string>
+    <string name="football">football</string>
 </resources>

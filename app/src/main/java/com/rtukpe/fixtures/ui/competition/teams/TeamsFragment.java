@@ -27,7 +27,8 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class TeamsFragment extends BaseFragment implements TeamsMvpView {
+public class TeamsFragment extends BaseFragment implements TeamsMvpView,
+        TeamsAdapter.OnRetryClicked {
 
     @BindView(R.id.recylcer_view)
     RecyclerView recyclerView;
@@ -92,6 +93,7 @@ public class TeamsFragment extends BaseFragment implements TeamsMvpView {
         ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(getBaseActivity(), R.dimen.item_offset);
         recyclerView.addItemDecoration(itemDecoration);
         teamsAdapter.setRecyclerViewClickListener(this);
+        teamsAdapter.setOnRetryClickedListener(this);
     }
 
     @Override
@@ -103,5 +105,11 @@ public class TeamsFragment extends BaseFragment implements TeamsMvpView {
     @Override
     public void updateTeams(ArrayList<Team> teams) {
         teamsAdapter.addTeams(teams);
+    }
+
+    @Override
+    public void onRetryClicked() {
+        int id = getBaseActivity().getIntent().getIntExtra(CompetitionsFragment.COMPETITION_ID, 0);
+        mPresenter.getTeams(id);
     }
 }

@@ -107,6 +107,17 @@ public abstract class BaseActivity extends AppCompatActivity implements MvpView,
     private void showSnackBar(String message) {
         Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), message, Snackbar.LENGTH_SHORT);
         View sbView = snackbar.getView();
+
+//        TypedValue tv = new TypedValue();
+//        int actionBarHeight = 0;
+//        if (getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
+//            actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
+//        }
+//
+//        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) sbView.getLayoutParams();
+//        params.setMargins(0, 0, 0, actionBarHeight); //substitute parameters for left, top, right, bottom
+//        sbView.setLayoutParams(params);
+
         TextView textView = sbView.findViewById(android.support.design.R.id.snackbar_text);
         textView.setTextColor(ContextCompat.getColor(this, R.color.white));
         snackbar.show();

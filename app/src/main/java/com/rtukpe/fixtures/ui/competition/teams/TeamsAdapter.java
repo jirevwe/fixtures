@@ -8,10 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.bumptech.glide.ListPreloader;
 import com.lb.auto_fit_textview.AutoResizeTextView;
 import com.rtukpe.fixtures.R;
 import com.rtukpe.fixtures.data.model.Team;
+import com.rtukpe.fixtures.ui.base.BaseViewHolder;
 import com.rtukpe.fixtures.utils.others.ImageUtils;
 import com.rtukpe.fixtures.utils.others.RecyclerViewClickListener;
 
@@ -20,21 +20,21 @@ import java.util.Collection;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
-public class TeamsAdapter extends RecyclerView.Adapter<TeamsAdapter.ViewHolder> {
+public class TeamsAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
-//    private final int imageWidthPixels = 64;
-//    private final int imageHeightPixels = 64;
+    private static final int VIEW_TYPE_NORMAL = 1;
+    private static final int VIEW_TYPE_EMPTY = 0;
+
     private ArrayList<Team> teams;
     private Context mContext;
     private RecyclerViewClickListener mRecyclerViewClickListener;
-    private ListPreloader.PreloadSizeProvider preloadSizeProvider;
-//    private ArrayList<String> urls;
+    private OnRetryClicked onRetryClickedListener;
 
     public TeamsAdapter(@NonNull Context context) {
         this.mContext = context;
         this.teams = new ArrayList<>();
-//        this.urls = new ArrayList<>();
     }
 
     public ArrayList<Team> getTeams() {
@@ -47,24 +47,40 @@ public class TeamsAdapter extends RecyclerView.Adapter<TeamsAdapter.ViewHolder> 
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.layout_team_item, parent, false);
-        return new ViewHolder(view, mRecyclerViewClickListener);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.teamName.setText(teams.get(holder.getAdapterPosition()).name);
-        if (teams.get(holder.getAdapterPosition()).logo != null && teams.get(holder.getAdapterPosition()).logo.contains("svg")) {
-            ImageUtils.loadSVG(mContext, teams.get(holder.getAdapterPosition()).logo, holder.teamLogo);
-        } else {
-            ImageUtils.displayImageFromUrl(mContext, teams.get(holder.getAdapterPosition()).logo, holder.teamLogo);
+    public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view;
+        switch (viewType) {
+            case VIEW_TYPE_NORMAL:
+                view = LayoutInflater.from(mContext).inflate(R.layout.layout_team_item, parent, false);
+                return new ViewHolder(view, mRecyclerViewClickListener);
+            case VIEW_TYPE_EMPTY:
+            default:
+                view = LayoutInflater.from(mContext).inflate(R.layout.layout_empty_view, parent, false);
+                return new EmptyViewHolder(view, mRecyclerViewClickListener);
         }
     }
 
     @Override
+    public int getItemViewType(int position) {
+        if (teams != null && teams.size() > 0) {
+            return VIEW_TYPE_NORMAL;
+        } else {
+            return VIEW_TYPE_EMPTY;
+        }
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
+        holder.onBind(position);
+    }
+
+    @Override
     public int getItemCount() {
-        return teams.size();
+        if (teams != null && teams.size() > 0) {
+            return teams.size();
+        } else {
+            return 1;
+        }
     }
 
     public Team getTeamAtPosition(int position) {
@@ -94,7 +110,15 @@ public class TeamsAdapter extends RecyclerView.Adapter<TeamsAdapter.ViewHolder> 
         notifyDataSetChanged();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public void setOnRetryClickedListener(OnRetryClicked onRetryClickedListener) {
+        this.onRetryClickedListener = onRetryClickedListener;
+    }
+
+    interface OnRetryClicked {
+        void onRetryClicked();
+    }
+
+    class ViewHolder extends BaseViewHolder implements View.OnClickListener {
 
         @BindView(R.id.competition_logo)
         ImageView teamLogo;
@@ -113,19 +137,36 @@ public class TeamsAdapter extends RecyclerView.Adapter<TeamsAdapter.ViewHolder> 
         }
 
         @Override
+        public void onBind(int position) {
+            super.onBind(position);
+
+            teamName.setText(teams.get(getAdapterPosition()).name);
+            if (teams.get(getAdapterPosition()).logo != null && teams.get(getAdapterPosition()).logo.contains("svg")) {
+                ImageUtils.loadSVG(mContext, teams.get(getAdapterPosition()).logo, teamLogo);
+            } else {
+                ImageUtils.displayImageFromUrl(mContext, teams.get(getAdapterPosition()).logo, teamLogo);
+            }
+        }
+
+        @Override
         public void onClick(View v) {
             recyclerViewClickListener.recyclerViewListClicked(v, getAdapterPosition());
         }
     }
 
-//    class HeaderViewHolder extends RecyclerView.ViewHolder {
-//
-//        @BindView(R.id.header_name)
-//        AutoResizeTextView headerName;
-//
-//        HeaderViewHolder(View itemView) {
-//            super(itemView);
-//            ButterKnife.bind(this, itemView);
-//        }
-//    }
+    class EmptyViewHolder extends BaseViewHolder {
+
+        RecyclerViewClickListener recyclerViewClickListener;
+
+        EmptyViewHolder(View itemView, RecyclerViewClickListener recyclerViewClickListener) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+            this.recyclerViewClickListener = recyclerViewClickListener;
+        }
+
+        @OnClick(R.id.retry)
+        void onRetryClick() {
+            if (onRetryClickedListener != null) onRetryClickedListener.onRetryClicked();
+        }
+    }
 }

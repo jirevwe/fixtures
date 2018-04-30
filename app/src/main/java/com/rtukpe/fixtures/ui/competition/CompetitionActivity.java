@@ -17,6 +17,8 @@ import com.rtukpe.fixtures.ui.competition.teams.TeamsFragment;
 import com.rtukpe.fixtures.ui.competitions.CompetitionsFragment;
 import com.rtukpe.fixtures.utils.others.widgets.CustomViewPager;
 
+import java.util.concurrent.Executors;
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
@@ -78,6 +80,8 @@ public class CompetitionActivity extends BaseActivity implements CompetitionMvpV
 
     @Override
     protected void setUp() {
+        Executors.newFixedThreadPool(1);
+
         mPresenter.onViewInitialized();
 
         setSupportActionBar(toolbar);

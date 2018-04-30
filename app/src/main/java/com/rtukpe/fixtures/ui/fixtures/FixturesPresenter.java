@@ -11,6 +11,7 @@ import java.util.Locale;
 import javax.inject.Inject;
 
 import io.reactivex.disposables.CompositeDisposable;
+import timber.log.Timber;
 
 public class FixturesPresenter<V extends FixturesMvpView> extends BasePresenter<V> implements FixturesMvpContract<V> {
 
@@ -39,7 +40,7 @@ public class FixturesPresenter<V extends FixturesMvpView> extends BasePresenter<
                 getDataManager().getFixtures(date, date)
                         .subscribeOn(getSchedulerProvider().io())
                         .observeOn(getSchedulerProvider().ui())
-                        .subscribe(fixturesResponse -> getMvpView().updateFixtures(fixturesResponse.fixtures))
+                        .subscribe(fixturesResponse -> getMvpView().updateFixtures(fixturesResponse.fixtures), Timber::e)
         );
     }
 }

@@ -3,6 +3,7 @@ package com.rtukpe.fixtures.ui.fixtures;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,7 +24,8 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class FixturesFragment extends BaseFragment implements FixturesMvpView {
+public class FixturesFragment extends BaseFragment implements FixturesMvpView,
+        FixturesAdapter.OnRetryClicked {
 
     @BindView(R.id.recylcer_view)
     RecyclerView recyclerView;
@@ -80,7 +82,9 @@ public class FixturesFragment extends BaseFragment implements FixturesMvpView {
 
         recyclerView.setAdapter(fixturesAdapter);
         recyclerView.setLayoutManager(mLinearLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
 
+        fixturesAdapter.setOnRetryClickedListener(this);
         fixturesAdapter.setRecyclerViewClickListener(this);
     }
 
@@ -97,5 +101,10 @@ public class FixturesFragment extends BaseFragment implements FixturesMvpView {
     @Override
     public void updateFixtures(ArrayList<Fixture> fixtures) {
         fixturesAdapter.addFixtures(fixtures);
+    }
+
+    @Override
+    public void onRetryClicked() {
+        mPresenter.getFixtures();
     }
 }

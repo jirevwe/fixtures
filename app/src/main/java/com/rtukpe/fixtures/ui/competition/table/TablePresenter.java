@@ -7,6 +7,7 @@ import com.rtukpe.fixtures.utils.rx.SchedulerProvider;
 import javax.inject.Inject;
 
 import io.reactivex.disposables.CompositeDisposable;
+import timber.log.Timber;
 
 public class TablePresenter<V extends TableMvpView> extends BasePresenter<V> implements TableMvpContract<V> {
 
@@ -26,7 +27,7 @@ public class TablePresenter<V extends TableMvpView> extends BasePresenter<V> imp
                 getDataManager().getCompetitionTable(id)
                         .subscribeOn(getSchedulerProvider().io())
                         .observeOn(getSchedulerProvider().ui())
-                        .subscribe(leagueTable -> getMvpView().updateTableStandings(leagueTable.standing))
+                        .subscribe(leagueTable -> getMvpView().updateTableStandings(leagueTable.standing), Timber::e)
         );
     }
 }

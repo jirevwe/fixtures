@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 
 import io.reactivex.disposables.CompositeDisposable;
+import timber.log.Timber;
 
 public class TeamsPresenter<V extends TeamsMvpView> extends BasePresenter<V> implements TeamsMvpContract<V> {
 
@@ -37,7 +38,7 @@ public class TeamsPresenter<V extends TeamsMvpView> extends BasePresenter<V> imp
                             ArrayList<Team> teams = teamsResponse.teams;
                             teams = (ArrayList<Team>) Stream.of(teams).sortBy(team -> team.name).collect(Collectors.toList());
                             getMvpView().updateTeams(teams);
-                        })
+                        }, Timber::e)
 
         );
     }
