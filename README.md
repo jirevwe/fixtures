@@ -16,7 +16,7 @@ This is a demo project being created to learn how to use
  - [X] Add UI for "competitions" view.
  - [x] Add remote repository to fetch scores other data
  - [x] View leagues tables, teams and players.
+ - [x] UI for empty states and offline error messages.
  - [ ] Find a way to add team logos to fixtures view cos they're not included in the fixtures response payload.
- - [ ] UI for empty states and offline error messages.
  - [ ] Room database and local repository for offline use.
  - [ ] Persist images?????????????????
