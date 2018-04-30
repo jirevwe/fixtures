@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken;
 import com.rtukpe.fixtures.data.model.Competition;
 import com.rtukpe.fixtures.data.model.FixturesResponse;
 import com.rtukpe.fixtures.data.model.LeagueTable;
+import com.rtukpe.fixtures.data.model.PlayersResponse;
 import com.rtukpe.fixtures.data.model.TeamsResponse;
 
 import java.lang.reflect.Type;
@@ -16,7 +17,285 @@ import io.reactivex.Observable;
 
 public class MockHelper implements MockerInterface {
 
-    private String fixtures, teams, competitions, table;
+    private String fixtures, teams, competitions, table, players;
+
+    {
+        players = "{\n" +
+                "    \"count\": 27,\n" +
+                "    \"players\": [\n" +
+                "        {\n" +
+                "            \"id\": 237,\n" +
+                "            \"name\": \"Romelu Lukaku\",\n" +
+                "            \"position\": \"Centre-Forward\",\n" +
+                "            \"jerseyNumber\": 9,\n" +
+                "            \"dateOfBirth\": \"1993-05-13\",\n" +
+                "            \"nationality\": \"Belgium\",\n" +
+                "            \"contractUntil\": \"2022-06-30\",\n" +
+                "            \"marketValue\": null\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"id\": 439,\n" +
+                "            \"name\": \"David de Gea\",\n" +
+                "            \"position\": \"Keeper\",\n" +
+                "            \"jerseyNumber\": 1,\n" +
+                "            \"dateOfBirth\": \"1990-11-07\",\n" +
+                "            \"nationality\": \"Spain\",\n" +
+                "            \"contractUntil\": \"2019-06-30\",\n" +
+                "            \"marketValue\": null\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"id\": 440,\n" +
+                "            \"name\": \"Sergio Romero\",\n" +
+                "            \"position\": \"Keeper\",\n" +
+                "            \"jerseyNumber\": 20,\n" +
+                "            \"dateOfBirth\": \"1987-02-22\",\n" +
+                "            \"nationality\": \"Argentina\",\n" +
+                "            \"contractUntil\": \"2021-06-30\",\n" +
+                "            \"marketValue\": null\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"id\": 441,\n" +
+                "            \"name\": \"Eric Bailly\",\n" +
+                "            \"position\": \"Centre-Back\",\n" +
+                "            \"jerseyNumber\": 3,\n" +
+                "            \"dateOfBirth\": \"1994-04-12\",\n" +
+                "            \"nationality\": \"Cote d'Ivoire\",\n" +
+                "            \"contractUntil\": \"2020-06-30\",\n" +
+                "            \"marketValue\": null\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"id\": 442,\n" +
+                "            \"name\": \"Chris Smalling\",\n" +
+                "            \"position\": \"Centre-Back\",\n" +
+                "            \"jerseyNumber\": 12,\n" +
+                "            \"dateOfBirth\": \"1989-11-22\",\n" +
+                "            \"nationality\": \"England\",\n" +
+                "            \"contractUntil\": \"2019-06-30\",\n" +
+                "            \"marketValue\": null\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"id\": 443,\n" +
+                "            \"name\": \"Marcos Rojo\",\n" +
+                "            \"position\": \"Centre-Back\",\n" +
+                "            \"jerseyNumber\": 5,\n" +
+                "            \"dateOfBirth\": \"1990-03-20\",\n" +
+                "            \"nationality\": \"Argentina\",\n" +
+                "            \"contractUntil\": \"2019-06-30\",\n" +
+                "            \"marketValue\": null\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"id\": 444,\n" +
+                "            \"name\": \"Phil Jones\",\n" +
+                "            \"position\": \"Centre-Back\",\n" +
+                "            \"jerseyNumber\": 4,\n" +
+                "            \"dateOfBirth\": \"1992-02-21\",\n" +
+                "            \"nationality\": \"England\",\n" +
+                "            \"contractUntil\": \"2019-06-30\",\n" +
+                "            \"marketValue\": null\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"id\": 445,\n" +
+                "            \"name\": \"Daley Blind\",\n" +
+                "            \"position\": \"Left-Back\",\n" +
+                "            \"jerseyNumber\": 17,\n" +
+                "            \"dateOfBirth\": \"1990-03-09\",\n" +
+                "            \"nationality\": \"Netherlands\",\n" +
+                "            \"contractUntil\": \"2019-06-30\",\n" +
+                "            \"marketValue\": null\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"id\": 446,\n" +
+                "            \"name\": \"Luke Shaw\",\n" +
+                "            \"position\": \"Left-Back\",\n" +
+                "            \"jerseyNumber\": 23,\n" +
+                "            \"dateOfBirth\": \"1995-07-12\",\n" +
+                "            \"nationality\": \"England\",\n" +
+                "            \"contractUntil\": \"2018-06-30\",\n" +
+                "            \"marketValue\": null\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"id\": 447,\n" +
+                "            \"name\": \"Matteo Darmian\",\n" +
+                "            \"position\": \"Right-Back\",\n" +
+                "            \"jerseyNumber\": 36,\n" +
+                "            \"dateOfBirth\": \"1989-12-02\",\n" +
+                "            \"nationality\": \"Italy\",\n" +
+                "            \"contractUntil\": \"2019-06-30\",\n" +
+                "            \"marketValue\": null\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"id\": 448,\n" +
+                "            \"name\": \"Antonio Valencia\",\n" +
+                "            \"position\": \"Right-Back\",\n" +
+                "            \"jerseyNumber\": 25,\n" +
+                "            \"dateOfBirth\": \"1985-08-04\",\n" +
+                "            \"nationality\": \"Ecuador\",\n" +
+                "            \"contractUntil\": \"2019-06-30\",\n" +
+                "            \"marketValue\": null\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"id\": 449,\n" +
+                "            \"name\": \"Michael Carrick\",\n" +
+                "            \"position\": \"Defensive Midfield\",\n" +
+                "            \"jerseyNumber\": 16,\n" +
+                "            \"dateOfBirth\": \"1981-07-28\",\n" +
+                "            \"nationality\": \"England\",\n" +
+                "            \"contractUntil\": \"2018-06-30\",\n" +
+                "            \"marketValue\": null\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"id\": 451,\n" +
+                "            \"name\": \"Paul Pogba\",\n" +
+                "            \"position\": \"Central Midfield\",\n" +
+                "            \"jerseyNumber\": 6,\n" +
+                "            \"dateOfBirth\": \"1993-03-15\",\n" +
+                "            \"nationality\": \"France\",\n" +
+                "            \"contractUntil\": \"2021-06-30\",\n" +
+                "            \"marketValue\": null\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"id\": 452,\n" +
+                "            \"name\": \"Ander Herrera\",\n" +
+                "            \"position\": \"Central Midfield\",\n" +
+                "            \"jerseyNumber\": 21,\n" +
+                "            \"dateOfBirth\": \"1989-08-14\",\n" +
+                "            \"nationality\": \"Spain\",\n" +
+                "            \"contractUntil\": \"2019-06-30\",\n" +
+                "            \"marketValue\": null\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"id\": 453,\n" +
+                "            \"name\": \"Marouane Fellaini\",\n" +
+                "            \"position\": \"Central Midfield\",\n" +
+                "            \"jerseyNumber\": 27,\n" +
+                "            \"dateOfBirth\": \"1987-11-22\",\n" +
+                "            \"nationality\": \"Belgium\",\n" +
+                "            \"contractUntil\": \"2018-06-30\",\n" +
+                "            \"marketValue\": null\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"id\": 454,\n" +
+                "            \"name\": \"Ashley Young\",\n" +
+                "            \"position\": \"Left Midfield\",\n" +
+                "            \"jerseyNumber\": 18,\n" +
+                "            \"dateOfBirth\": \"1985-07-09\",\n" +
+                "            \"nationality\": \"England\",\n" +
+                "            \"contractUntil\": \"2018-06-30\",\n" +
+                "            \"marketValue\": null\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"id\": 456,\n" +
+                "            \"name\": \"Juan Mata\",\n" +
+                "            \"position\": \"Attacking Midfield\",\n" +
+                "            \"jerseyNumber\": 8,\n" +
+                "            \"dateOfBirth\": \"1988-04-28\",\n" +
+                "            \"nationality\": \"Spain\",\n" +
+                "            \"contractUntil\": \"2019-06-30\",\n" +
+                "            \"marketValue\": null\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"id\": 457,\n" +
+                "            \"name\": \"Jesse Lingard\",\n" +
+                "            \"position\": \"Left Wing\",\n" +
+                "            \"jerseyNumber\": 14,\n" +
+                "            \"dateOfBirth\": \"1992-12-15\",\n" +
+                "            \"nationality\": \"England\",\n" +
+                "            \"contractUntil\": \"2021-06-30\",\n" +
+                "            \"marketValue\": null\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"id\": 459,\n" +
+                "            \"name\": \"Anthony Martial\",\n" +
+                "            \"position\": \"Left Wing\",\n" +
+                "            \"jerseyNumber\": 11,\n" +
+                "            \"dateOfBirth\": \"1995-12-05\",\n" +
+                "            \"nationality\": \"France\",\n" +
+                "            \"contractUntil\": \"2019-06-30\",\n" +
+                "            \"marketValue\": null\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"id\": 460,\n" +
+                "            \"name\": \"Zlatan Ibrahimovic\",\n" +
+                "            \"position\": \"Centre-Forward\",\n" +
+                "            \"jerseyNumber\": 10,\n" +
+                "            \"dateOfBirth\": \"1981-10-03\",\n" +
+                "            \"nationality\": \"Sweden\",\n" +
+                "            \"contractUntil\": \"2018-06-30\",\n" +
+                "            \"marketValue\": null\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"id\": 461,\n" +
+                "            \"name\": \"Marcus Rashford\",\n" +
+                "            \"position\": \"Centre-Forward\",\n" +
+                "            \"jerseyNumber\": 19,\n" +
+                "            \"dateOfBirth\": \"1997-10-31\",\n" +
+                "            \"nationality\": \"England\",\n" +
+                "            \"contractUntil\": \"2020-06-30\",\n" +
+                "            \"marketValue\": null\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"id\": 484,\n" +
+                "            \"name\": \"Alexis Sánchez\",\n" +
+                "            \"position\": \"Left Wing\",\n" +
+                "            \"jerseyNumber\": 7,\n" +
+                "            \"dateOfBirth\": \"1988-12-19\",\n" +
+                "            \"nationality\": \"Chile\",\n" +
+                "            \"contractUntil\": \"2022-06-30\",\n" +
+                "            \"marketValue\": null\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"id\": 533,\n" +
+                "            \"name\": \"Nemanja Matic\",\n" +
+                "            \"position\": \"Defensive Midfield\",\n" +
+                "            \"jerseyNumber\": 31,\n" +
+                "            \"dateOfBirth\": \"1988-08-01\",\n" +
+                "            \"nationality\": \"Serbia\",\n" +
+                "            \"contractUntil\": \"2020-06-30\",\n" +
+                "            \"marketValue\": null\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"id\": 3936,\n" +
+                "            \"name\": \"Victor Lindelöf\",\n" +
+                "            \"position\": \"Centre-Back\",\n" +
+                "            \"jerseyNumber\": 2,\n" +
+                "            \"dateOfBirth\": \"1994-07-17\",\n" +
+                "            \"nationality\": \"Sweden\",\n" +
+                "            \"contractUntil\": \"2021-06-30\",\n" +
+                "            \"marketValue\": null\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"id\": 4212,\n" +
+                "            \"name\": \"Joel Pereira\",\n" +
+                "            \"position\": \"Keeper\",\n" +
+                "            \"jerseyNumber\": 40,\n" +
+                "            \"dateOfBirth\": \"1996-06-28\",\n" +
+                "            \"nationality\": \"Portugal\",\n" +
+                "            \"contractUntil\": \"2021-06-30\",\n" +
+                "            \"marketValue\": null\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"id\": 5373,\n" +
+                "            \"name\": \"Cameron Borthwick-Jackson\",\n" +
+                "            \"position\": \"Left-Back\",\n" +
+                "            \"jerseyNumber\": 43,\n" +
+                "            \"dateOfBirth\": \"1997-02-02\",\n" +
+                "            \"nationality\": \"England\",\n" +
+                "            \"contractUntil\": \"2020-06-30\",\n" +
+                "            \"marketValue\": null\n" +
+                "        },\n" +
+                "        {\n" +
+                "            \"id\": 5374,\n" +
+                "            \"name\": \"Scott McTominay\",\n" +
+                "            \"position\": \"Attacking Midfield\",\n" +
+                "            \"jerseyNumber\": 39,\n" +
+                "            \"dateOfBirth\": \"1996-12-08\",\n" +
+                "            \"nationality\": \"Scotland\",\n" +
+                "            \"contractUntil\": \"2021-06-30\",\n" +
+                "            \"marketValue\": null\n" +
+                "        }\n" +
+                "    ]\n" +
+                "}";
+    }
 
     {
         table = "{\n" +
@@ -594,6 +873,11 @@ public class MockHelper implements MockerInterface {
 
     @Inject
     MockHelper() {
+    }
+
+    @Override
+    public PlayersResponse getMockTeamPlayers() {
+        return new Gson().fromJson(players, PlayersResponse.class);
     }
 
     @Override

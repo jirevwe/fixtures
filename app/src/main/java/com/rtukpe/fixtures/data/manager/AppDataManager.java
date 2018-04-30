@@ -5,6 +5,7 @@ import android.content.Context;
 import com.rtukpe.fixtures.data.model.Competition;
 import com.rtukpe.fixtures.data.model.FixturesResponse;
 import com.rtukpe.fixtures.data.model.LeagueTable;
+import com.rtukpe.fixtures.data.model.PlayersResponse;
 import com.rtukpe.fixtures.data.model.TeamsResponse;
 import com.rtukpe.fixtures.data.repository.mock.MockHelper;
 import com.rtukpe.fixtures.data.repository.remote.helpers.RemoteServiceHelper;
@@ -16,6 +17,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.reactivex.Observable;
+import retrofit2.Call;
 
 /**
  * Created by rtukpe on 14/03/2018.
@@ -52,6 +54,11 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public Call<PlayersResponse> getTeamPlayers(int id) {
+        return mRemoteServiceHelper.getTeamPlayers(id);
+    }
+
+    @Override
     public Observable<LeagueTable> getCompetitionTable(int id) {
         return mRemoteServiceHelper.getCompetitionTable(id);
     }
@@ -64,6 +71,11 @@ public class AppDataManager implements DataManager {
     @Override
     public Observable<FixturesResponse> getFixtures(String timeFrameStart, String timeFrameEnd) {
         return mRemoteServiceHelper.getFixtures(timeFrameStart, timeFrameEnd);
+    }
+
+    @Override
+    public PlayersResponse getMockTeamPlayers() {
+        return mMockHelper.getMockTeamPlayers();
     }
 
     @Override

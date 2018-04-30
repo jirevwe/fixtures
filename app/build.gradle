@@ -44,7 +44,6 @@ dependencies {
     implementation 'com.android.support:support-v4:27.1.1'
     testImplementation 'junit:junit:4.12'
     compileOnly 'javax.annotation:jsr250-api:1.0'
-    implementation project(':expandabletextview')
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'javax.inject:javax.inject:1'
     implementation 'com.annimon:stream:1.1.9'
@@ -84,7 +83,7 @@ dependencies {
     kapt "com.android.databinding:compiler:$rootProject.androidPluginVersion"
     kapt "com.google.dagger:dagger-android-processor:$rootProject.daggerVersion"
     kapt "com.jakewharton:butterknife-compiler:$rootProject.butterKnifeVersion"
-    implementation files('libs/androidsvg-1.2.1.jar')
+    implementation group: 'com.caverock', name: 'androidsvg', version: '1.2.1'
     implementation ("com.github.bumptech.glide:recyclerview-integration:4.7.1") {
         // Excludes the support library because it's already included by Glide.
         transitive = false

@@ -16,6 +16,7 @@ import com.rtukpe.fixtures.R;
 import com.rtukpe.fixtures.data.model.Team;
 import com.rtukpe.fixtures.di.component.ActivityComponent;
 import com.rtukpe.fixtures.ui.base.BaseFragment;
+import com.rtukpe.fixtures.ui.competition.teams.team.TeamBottomSheetFragment;
 import com.rtukpe.fixtures.ui.competitions.CompetitionsFragment;
 import com.rtukpe.fixtures.utils.others.ItemOffsetDecoration;
 
@@ -95,7 +96,8 @@ public class TeamsFragment extends BaseFragment implements TeamsMvpView {
 
     @Override
     public void recyclerViewListClicked(View v, int position) {
-
+        TeamBottomSheetFragment dialog = TeamBottomSheetFragment.newInstance(teamsAdapter.getTeamAtPosition(position));
+        dialog.show(getBaseActivity().getSupportFragmentManager(), "TEAM");
     }
 
     @Override

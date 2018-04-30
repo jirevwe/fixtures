@@ -24,6 +24,10 @@ import com.rtukpe.fixtures.ui.competition.teams.TeamsAdapter;
 import com.rtukpe.fixtures.ui.competition.teams.TeamsMvpContract;
 import com.rtukpe.fixtures.ui.competition.teams.TeamsMvpView;
 import com.rtukpe.fixtures.ui.competition.teams.TeamsPresenter;
+import com.rtukpe.fixtures.ui.competition.teams.team.PlayersAdapter;
+import com.rtukpe.fixtures.ui.competition.teams.team.TeamMvpContract;
+import com.rtukpe.fixtures.ui.competition.teams.team.TeamMvpView;
+import com.rtukpe.fixtures.ui.competition.teams.team.TeamPresenter;
 import com.rtukpe.fixtures.ui.competitions.CompetitionsAdapter;
 import com.rtukpe.fixtures.ui.competitions.CompetitionsMvpContract;
 import com.rtukpe.fixtures.ui.competitions.CompetitionsMvpView;
@@ -94,6 +98,11 @@ public class ActivityModule {
     }
 
     @Provides
+    TeamMvpContract<TeamMvpView> provideTeamPresenter(TeamPresenter<TeamMvpView> presenter) {
+        return presenter;
+    }
+
+    @Provides
     CompetitionFixturesMvpContract<CompetitionFixturesMvpView> provideCompetitionFixturesPresenter(CompetitionFixturesPresenter<CompetitionFixturesMvpView> presenter) {
         return presenter;
     }
@@ -141,6 +150,11 @@ public class ActivityModule {
     @Provides
     CompetitionsAdapter provideCompetitionsAdapter(AppCompatActivity activity) {
         return new CompetitionsAdapter(activity);
+    }
+
+    @Provides
+    PlayersAdapter providePlayersAdapter(AppCompatActivity activity) {
+        return new PlayersAdapter(activity);
     }
 
     @Provides

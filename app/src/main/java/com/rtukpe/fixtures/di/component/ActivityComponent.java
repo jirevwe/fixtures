@@ -6,6 +6,7 @@ import com.rtukpe.fixtures.ui.competition.CompetitionActivity;
 import com.rtukpe.fixtures.ui.competition.fixtures.CompetitionFixturesFragment;
 import com.rtukpe.fixtures.ui.competition.table.TableFragment;
 import com.rtukpe.fixtures.ui.competition.teams.TeamsFragment;
+import com.rtukpe.fixtures.ui.competition.teams.team.TeamBottomSheetFragment;
 import com.rtukpe.fixtures.ui.competitions.CompetitionsFragment;
 import com.rtukpe.fixtures.ui.fixtures.FixturesFragment;
 import com.rtukpe.fixtures.ui.home.DashboardActivity;
@@ -35,6 +36,8 @@ public interface ActivityComponent {
     void inject(FixturesFragment fixturesFragment);
 
     void inject(CompetitionsFragment competitionsFragment);
+
+    void inject(TeamBottomSheetFragment teamBottomSheetFragment);
 
     void inject(CompetitionFixturesFragment competitionFixturesFragment);
 }

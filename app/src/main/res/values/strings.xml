@@ -29,4 +29,8 @@
     <string name="home_team_name_ph">Arsenal</string>
     <string name="two">2</string>
     <string name="twelve">12</string>
+    <string name="close">close</string>
+    <string name="player_name_ph">Romelu Lukaku</string>
+    <string name="team_player_country_ph">Belgium</string>
+    <string name="team_player_position_ph">Centre-Forward</string>
 </resources>

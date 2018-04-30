@@ -23,18 +23,18 @@ import butterknife.ButterKnife;
 
 public class TeamsAdapter extends RecyclerView.Adapter<TeamsAdapter.ViewHolder> {
 
-    private final int imageWidthPixels = 64;
-    private final int imageHeightPixels = 64;
+//    private final int imageWidthPixels = 64;
+//    private final int imageHeightPixels = 64;
     private ArrayList<Team> teams;
     private Context mContext;
     private RecyclerViewClickListener mRecyclerViewClickListener;
     private ListPreloader.PreloadSizeProvider preloadSizeProvider;
-    private ArrayList<String> urls;
+//    private ArrayList<String> urls;
 
     public TeamsAdapter(@NonNull Context context) {
         this.mContext = context;
         this.teams = new ArrayList<>();
-        this.urls = new ArrayList<>();
+//        this.urls = new ArrayList<>();
     }
 
     public ArrayList<Team> getTeams() {
@@ -118,14 +118,14 @@ public class TeamsAdapter extends RecyclerView.Adapter<TeamsAdapter.ViewHolder> 
         }
     }
 
-    class HeaderViewHolder extends RecyclerView.ViewHolder {
-
-        @BindView(R.id.header_name)
-        AutoResizeTextView headerName;
-
-        HeaderViewHolder(View itemView) {
-            super(itemView);
-            ButterKnife.bind(this, itemView);
-        }
-    }
+//    class HeaderViewHolder extends RecyclerView.ViewHolder {
+//
+//        @BindView(R.id.header_name)
+//        AutoResizeTextView headerName;
+//
+//        HeaderViewHolder(View itemView) {
+//            super(itemView);
+//            ButterKnife.bind(this, itemView);
+//        }
+//    }
 }

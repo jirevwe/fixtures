@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.PictureDrawable;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
@@ -133,7 +134,7 @@ public class ImageUtils {
                     .placeholder(R.drawable.champions_league32x32)
                     .fitCenter()
                     .centerCrop()
-                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .dontAnimate();
 
             GlideApp.with(new WeakReference<>(context).get())
@@ -155,13 +156,13 @@ public class ImageUtils {
                     .placeholder(R.drawable.champions_league32x32)
                     .fitCenter()
                     .centerCrop()
-                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .dontAnimate();
 
             GlideApp.with(new WeakReference<>(context).get())
                     .asBitmap()
                     .apply(myOptions)
-                    .load(url)
+                    .load(Uri.parse(url))
                     .override(64, 64)
                     .into(imageView);
         } catch (NullPointerException e) {
@@ -179,6 +180,6 @@ public class ImageUtils {
                 .transition(withCrossFade())
                 .listener(new SvgSoftwareLayerSetter())
                 .override(64, 64);
-        requestBuilder.load(uri).into(imageView);
+        requestBuilder.load(Uri.parse(uri)).into(imageView);
     }
 }

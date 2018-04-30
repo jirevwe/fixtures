@@ -9,8 +9,6 @@ import com.bumptech.glide.Registry;
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.module.AppGlideModule;
 import com.caverock.androidsvg.SVG;
-import com.rtukpe.fixtures.utils.others.SvgDecoder;
-import com.rtukpe.fixtures.utils.others.SvgDrawableTranscoder;
 
 import java.io.InputStream;
 
@@ -19,16 +17,15 @@ import java.io.InputStream;
  */
 @GlideModule
 public class SvgModule extends AppGlideModule {
-  @Override
-  public void registerComponents(@NonNull Context context, @NonNull Glide glide,
-      @NonNull Registry registry) {
-    registry.register(SVG.class, PictureDrawable.class, new SvgDrawableTranscoder())
-        .append(InputStream.class, SVG.class, new SvgDecoder());
-  }
+    @Override
+    public void registerComponents(@NonNull Context context, @NonNull Glide glide, @NonNull Registry registry) {
+        registry.register(SVG.class, PictureDrawable.class, new SvgDrawableTranscoder())
+                .append(InputStream.class, SVG.class, new SvgDecoder());
+    }
 
-  // Disable manifest parsing to avoid adding similar modules twice.
-  @Override
-  public boolean isManifestParsingEnabled() {
-    return false;
-  }
+    // Disable manifest parsing to avoid adding similar modules twice.
+    @Override
+    public boolean isManifestParsingEnabled() {
+        return false;
+    }
 }
