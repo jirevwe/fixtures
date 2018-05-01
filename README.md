@@ -10,7 +10,7 @@ This is a demo project being created to learn how to use
  The app will use an [open football scores api](http://api.football-data.org/) to show not-so-realtime scores.
  
  ### Current Progress
- <img src="fixtures.gif" alt="fixtures page" width="256"> <img src="competition.gif" alt="fixtures page" width="256"> <img src="teams.gif" alt="fixtures page" width="256">
+ <img src="fixtures.gif" alt="fixtures page" width="256"> <img src="competition.gif" alt="fixtures page" width="256">
 
  ### TODO
  - [X] Add UI for "competitions" view.
