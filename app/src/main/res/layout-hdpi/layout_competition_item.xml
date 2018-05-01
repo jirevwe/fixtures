@@ -27,7 +27,8 @@
             android:background="@drawable/circle_border"
             android:contentDescription="@string/team_logo"
             android:padding="4dp"
-            android:src="@drawable/champions_league32x32"/>
+            android:src="@drawable/champions_league32x32"
+            android:visibility="gone"/>
 
         <com.lb.auto_fit_textview.AutoResizeTextView
             android:id="@+id/competition.name"

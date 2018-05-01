@@ -28,7 +28,7 @@ public class DashboardActivity extends BaseActivity implements DashboardMvpView,
         BottomNavigationView.OnNavigationItemSelectedListener {
 
     public static final String SELECTED_ITEM = "arg_selected_item";
-    private static String fixtures = "Fixtures";
+    private static String fixtures = "Today's Fixtures";
     private static String competitions = "Competitions";
 
     Fragment fixturesFragment;
@@ -131,6 +131,8 @@ public class DashboardActivity extends BaseActivity implements DashboardMvpView,
 
     //Add all the fragments that need to be added and hidden. Also, add the one that is supposed to be the starting one, that one is not hidden.
     private void createFragments() {
+        mFragmentManager.beginTransaction().remove(competitionsFragment).commit();
+        mFragmentManager.beginTransaction().remove(fixturesFragment).commit();
         addHideFragment(competitionsFragment, competitions);
 
         mFragmentManager.beginTransaction().add(R.id.container, fixturesFragment, fixtures).commit();

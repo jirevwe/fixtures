@@ -78,7 +78,8 @@
                     android:contentDescription="@string/team_logo"
                     android:padding="2dp"
                     android:scaleType="centerInside"
-                    android:src="@drawable/arsenal32x27"/>
+                    android:src="@drawable/arsenal32x27"
+                    android:visibility="gone"/>
 
                 <ImageView
                     android:id="@+id/fixture_away_team_logo"
@@ -89,7 +90,8 @@
                     android:contentDescription="@string/team_logo"
                     android:padding="2dp"
                     android:scaleType="centerInside"
-                    android:src="@drawable/man_city32x32"/>
+                    android:src="@drawable/man_city32x32"
+                    android:visibility="gone"/>
 
             </LinearLayout>
 
