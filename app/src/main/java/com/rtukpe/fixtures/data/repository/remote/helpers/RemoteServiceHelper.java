@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
-import retrofit2.Call;
 
 /**
  * Created by rtukpe on 22/03/2018.
@@ -21,11 +20,15 @@ import retrofit2.Call;
 
 public class RemoteServiceHelper extends BaseHelper implements RemoteServiceApi {
 
-    private final RemoteServiceApi mRemoteServiceApi;
+    private RemoteServiceApi mRemoteServiceApi;
 
     @Inject
     RemoteServiceHelper() {
         this.mRemoteServiceApi = createService(RemoteServiceApi.class);
+    }
+
+    public void setRemoteServiceApi(RemoteServiceApi mRemoteServiceApi) {
+        this.mRemoteServiceApi = mRemoteServiceApi;
     }
 
     @Override
@@ -39,7 +42,7 @@ public class RemoteServiceHelper extends BaseHelper implements RemoteServiceApi 
     }
 
     @Override
-    public Call<PlayersResponse> getTeamPlayers(int id) {
+    public Observable<PlayersResponse> getTeamPlayers(int id) {
         return mRemoteServiceApi.getTeamPlayers(id);
     }
 

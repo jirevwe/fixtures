@@ -17,7 +17,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.reactivex.Observable;
-import retrofit2.Call;
 
 /**
  * Created by rtukpe on 14/03/2018.
@@ -54,7 +53,7 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Call<PlayersResponse> getTeamPlayers(int id) {
+    public Observable<PlayersResponse> getTeamPlayers(int id) {
         return mRemoteServiceHelper.getTeamPlayers(id);
     }
 

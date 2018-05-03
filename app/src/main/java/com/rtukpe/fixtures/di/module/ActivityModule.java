@@ -80,6 +80,8 @@ public class ActivityModule {
         return new AppSchedulerProvider();
     }
 
+
+
     @Provides
     @PerActivity
     DashboardMvpContract<DashboardMvpView> provideDashboardPresenter(DashboardPresenter<DashboardMvpView> presenter) {

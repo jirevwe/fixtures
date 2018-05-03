@@ -211,7 +211,10 @@ public class FixturesAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         @Override
         public void onBind(int position) {
             super.onBind(position);
+            checkConnection();
+        }
 
+        void checkConnection() {
             if (AppUtils.hasInternetConnection(mContext)) {
                 errorNoItems.setVisibility(View.VISIBLE);
                 errorNoInternet.setVisibility(View.GONE);
@@ -225,7 +228,10 @@ public class FixturesAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
         @OnClick(R.id.retry)
         void onRetryClick() {
-            if (onRetryClickedListener != null) onRetryClickedListener.onRetryClicked();
+            if (onRetryClickedListener != null) {
+                checkConnection();
+                onRetryClickedListener.onRetryClicked();
+            }
         }
     }
 }
