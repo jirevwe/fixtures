@@ -3,7 +3,7 @@
 ext {
     apolloVersion = '0.4.4'
     daggerVersion = "2.12"
-    kotlinVersion = '1.2.40'
+    kotlinVersion = '1.2.41'
     supportVersion = "27.1.1"
     retrofitVersion = "2.3.0"
     butterKnifeVersion = "8.8.1"
@@ -14,7 +14,7 @@ buildscript {
 
     ext.realmVersion = '5.0.0'
     ext.androidPluginVersion = '3.1.0'
-    ext.kotlinVersion = '1.2.40'
+    ext.kotlinVersion = '1.2.41'
 
     repositories {
         jcenter()

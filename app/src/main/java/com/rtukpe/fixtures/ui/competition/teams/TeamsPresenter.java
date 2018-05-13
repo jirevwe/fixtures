@@ -35,7 +35,7 @@ public class TeamsPresenter<V extends TeamsMvpView> extends BasePresenter<V> imp
                         .subscribeOn(getSchedulerProvider().io())
                         .observeOn(getSchedulerProvider().ui())
                         .subscribe(teamsResponse -> {
-                            ArrayList<Team> teams = teamsResponse.teams;
+                            ArrayList<Team> teams = teamsResponse.getTeams();
                             teams = (ArrayList<Team>) Stream.of(teams).sortBy(team -> team.name).collect(Collectors.toList());
                             getMvpView().updateTeams(teams);
                         }, Timber::e)

@@ -43,7 +43,7 @@ public class CompetitionsAdapter extends RecyclerView.Adapter<CompetitionsAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.competitionName.setText(mCompetitions.get(position).caption);
+        holder.competitionName.setText(mCompetitions.get(position).getCaption());
         holder.competitionLogo.setImageDrawable(mContext.getResources().getDrawable(R.drawable.champions_league32x32));
     }
 

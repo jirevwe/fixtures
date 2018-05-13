@@ -233,8 +233,8 @@ public class RemoteServiceHelperTest {
         List<ArrayList<Competition>> onNextEvents = observer.values();
         ArrayList<Competition> firstCompetition = onNextEvents.get(0);
 
-        Assert.assertEquals(FIRST_COMPETITION_CAPTION, firstCompetition.get(0).caption);
-        Assert.assertEquals(SECOND_COMPETITION_YEAR, firstCompetition.get(1).year);
+        Assert.assertEquals(FIRST_COMPETITION_CAPTION, firstCompetition.get(0).getCaption());
+        Assert.assertEquals(SECOND_COMPETITION_YEAR, firstCompetition.get(1).getYear());
         verify(remoteServiceApi).getCompetitions();
     }
 

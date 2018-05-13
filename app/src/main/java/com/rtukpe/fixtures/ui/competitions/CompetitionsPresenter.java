@@ -34,7 +34,7 @@ public class CompetitionsPresenter<V extends CompetitionsMvpView> extends BasePr
                         .subscribeOn(getSchedulerProvider().io())
                         .observeOn(getSchedulerProvider().ui())
                         .subscribe(competitions -> {
-                            competitions = (ArrayList<Competition>) Stream.of(competitions).sortBy(competition -> competition.caption).collect(Collectors.toList());
+                            competitions = (ArrayList<Competition>) Stream.of(competitions).sortBy(competition -> competition.getCaption()).collect(Collectors.toList());
                             getMvpView().updateCompetitions(competitions);
                         }, Timber::e)
         );

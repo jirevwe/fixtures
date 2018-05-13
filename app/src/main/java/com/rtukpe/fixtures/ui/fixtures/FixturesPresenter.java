@@ -40,7 +40,7 @@ public class FixturesPresenter<V extends FixturesMvpView> extends BasePresenter<
                 getDataManager().getFixtures(date, date)
                         .subscribeOn(getSchedulerProvider().io())
                         .observeOn(getSchedulerProvider().ui())
-                        .subscribe(fixturesResponse -> getMvpView().updateFixtures(fixturesResponse.fixtures), Timber::w)
+                        .subscribe(fixturesResponse -> getMvpView().updateFixtures(fixturesResponse.getFixtures()), Timber::w)
         );
     }
 }

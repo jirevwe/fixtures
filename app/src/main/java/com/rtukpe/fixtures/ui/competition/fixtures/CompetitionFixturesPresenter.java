@@ -32,7 +32,7 @@ public class CompetitionFixturesPresenter<V extends CompetitionFixturesMvpView> 
                 getDataManager().getCompetitionFixtures(id, date, date)
                         .subscribeOn(getSchedulerProvider().io())
                         .observeOn(getSchedulerProvider().ui())
-                        .subscribe(fixturesResponse -> getMvpView().updateFixtures(fixturesResponse.fixtures), Timber::e)
+                        .subscribe(fixturesResponse -> getMvpView().updateFixtures(fixturesResponse.getFixtures()), Timber::e)
         );
     }
 }

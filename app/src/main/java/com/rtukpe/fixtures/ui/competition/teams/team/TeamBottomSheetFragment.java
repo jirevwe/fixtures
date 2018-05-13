@@ -133,7 +133,7 @@ public class TeamBottomSheetFragment extends BaseDialog implements TeamMvpView {
 
             Timber.d(team.toString());
 
-            if (team.logo != null && team.logo.contains("svg")) {
+            if (team.logo.contains("svg")) {
                 ImageUtils.loadSVG(getBaseActivity(), team.logo, teamLogo);
             } else {
                 ImageUtils.displayImageFromUrl(getBaseActivity(), team.logo, teamLogo);

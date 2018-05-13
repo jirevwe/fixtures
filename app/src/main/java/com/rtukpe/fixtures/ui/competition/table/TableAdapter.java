@@ -48,15 +48,15 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.standingName.setText(standings.get(holder.getAdapterPosition()).team);
-        holder.standingIndex.setText(String.valueOf(standings.get(holder.getAdapterPosition()).rank));
-        holder.standingPoints.setText(String.valueOf(standings.get(holder.getAdapterPosition()).points));
-        holder.standingPlayed.setText(String.valueOf(standings.get(holder.getAdapterPosition()).playedGames));
-        holder.standingGoalDifference.setText(String.valueOf(standings.get(holder.getAdapterPosition()).goalDifference));
-        if (standings.get(holder.getAdapterPosition()).logo != null && standings.get(holder.getAdapterPosition()).logo.contains("svg")) {
-            ImageUtils.loadSVG(mContext, standings.get(holder.getAdapterPosition()).logo, holder.standingLogo);
+        holder.standingName.setText(standings.get(holder.getAdapterPosition()).getTeam());
+        holder.standingIndex.setText(String.valueOf(standings.get(holder.getAdapterPosition()).getRank()));
+        holder.standingPoints.setText(String.valueOf(standings.get(holder.getAdapterPosition()).getPoints()));
+        holder.standingPlayed.setText(String.valueOf(standings.get(holder.getAdapterPosition()).getPlayedGames()));
+        holder.standingGoalDifference.setText(String.valueOf(standings.get(holder.getAdapterPosition()).getGoalDifference()));
+        if (standings.get(holder.getAdapterPosition()).getLogo() != null && standings.get(holder.getAdapterPosition()).getLogo().contains("svg")) {
+            ImageUtils.loadSVG(mContext, standings.get(holder.getAdapterPosition()).getLogo(), holder.standingLogo);
         } else {
-            ImageUtils.displayImageFromUrl(mContext, standings.get(holder.getAdapterPosition()).logo, holder.standingLogo);
+            ImageUtils.displayImageFromUrl(mContext, standings.get(holder.getAdapterPosition()).getLogo(), holder.standingLogo);
         }
     }
 

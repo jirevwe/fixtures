@@ -27,7 +27,7 @@ public class TablePresenter<V extends TableMvpView> extends BasePresenter<V> imp
                 getDataManager().getCompetitionTable(id)
                         .subscribeOn(getSchedulerProvider().io())
                         .observeOn(getSchedulerProvider().ui())
-                        .subscribe(leagueTable -> getMvpView().updateTableStandings(leagueTable.standing), Timber::e)
+                        .subscribe(leagueTable -> getMvpView().updateTableStandings(leagueTable.getStanding()), Timber::e)
         );
     }
 }

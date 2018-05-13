@@ -179,8 +179,8 @@ public class FixturesAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
             matchDay.setText(String.format("MD: %s", String.valueOf(fixtures.get(getAdapterPosition()).matchday)));
             status.setText(fixtures.get(getAdapterPosition()).status);
-            startTime.setText(new SimpleDateFormat("HH:mm", Locale.US).format(fixtures.get(getAdapterPosition()).date));
-            minutes.setText(String.format("%s'", new SimpleDateFormat("mm", Locale.US).format(fixtures.get(getAdapterPosition()).date)));
+            startTime.setText(new SimpleDateFormat("HH:mm", Locale.US).format(fixtures.get(getAdapterPosition()).getDate()));
+            minutes.setText(String.format("%s'", new SimpleDateFormat("mm", Locale.US).format(fixtures.get(getAdapterPosition()).getDate())));
         }
 
         @Override

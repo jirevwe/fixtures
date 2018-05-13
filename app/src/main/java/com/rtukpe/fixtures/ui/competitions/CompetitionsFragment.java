@@ -93,9 +93,9 @@ public class CompetitionsFragment extends BaseFragment implements CompetitionsMv
     @Override
     public void recyclerViewListClicked(View v, int position) {
         if (AppUtils.hasInternetConnection(getBaseActivity())) {
-            Intent intent = CompetitionActivity.getStartIntent(getBaseActivity());
+            Intent intent = CompetitionActivity.Companion.getStartIntent(getBaseActivity());
             intent.putExtra(COMPETITION_ID, competitionsAdapter.getCompetitionAtPosition(position).id);
-            intent.putExtra(COMPETITION_NAME, competitionsAdapter.getCompetitionAtPosition(position).caption);
+            intent.putExtra(COMPETITION_NAME, competitionsAdapter.getCompetitionAtPosition(position).getCaption());
             startActivity(intent);
         } else {
             show("Please connect to the internet", false);

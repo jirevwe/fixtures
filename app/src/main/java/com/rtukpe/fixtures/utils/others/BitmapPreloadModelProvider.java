@@ -12,7 +12,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.rtukpe.fixtures.R;
 import com.rtukpe.fixtures.data.model.Team;
-import com.rtukpe.fixtures.utils.others.GlideApp;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -21,7 +20,7 @@ import java.util.List;
 
 public class BitmapPreloadModelProvider implements ListPreloader.PreloadModelProvider<Team> {
 
-    ArrayList<Team> teams;
+    private ArrayList<Team> teams;
     private Context mContext;
 
     public BitmapPreloadModelProvider(Context mContext, ArrayList<Team> teams) {
