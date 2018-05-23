@@ -1,4 +1,4 @@
-package com.rtukpe.fixtures.ui.competition.fixtures
+package com.rtukpe.fixtures.ui.fixtures
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
@@ -19,9 +19,9 @@ import com.rtukpe.fixtures.utils.others.RecyclerViewClickListener
 import java.text.SimpleDateFormat
 import java.util.*
 
-class CompetitionFixturesAdapter(private val mContext: Context) : RecyclerView.Adapter<BaseViewHolder>() {
+class FixturesAdapter(private val mContext: Context) : RecyclerView.Adapter<BaseViewHolder>() {
 
-    var fixtures: ArrayList<Fixture>
+    val fixtures: ArrayList<Fixture> = ArrayList()
     lateinit var mRecyclerViewClickListener: RecyclerViewClickListener
     lateinit var onRetryClickedListener: OnRetryClicked
 
@@ -31,13 +31,12 @@ class CompetitionFixturesAdapter(private val mContext: Context) : RecyclerView.A
     val lastFixture: Fixture
         get() = fixtures[fixtures.size - 1]
 
-    init {
-        this.fixtures = ArrayList()
+    fun setRecyclerViewClickListener(mRecyclerViewClickListener: RecyclerViewClickListener) {
+        this.mRecyclerViewClickListener = mRecyclerViewClickListener
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
         val view: View?
-
         when (viewType) {
             VIEW_TYPE_NORMAL -> {
                 view = LayoutInflater.from(mContext).inflate(R.layout.layout_fixture_item, parent, false)
@@ -81,25 +80,30 @@ class CompetitionFixturesAdapter(private val mContext: Context) : RecyclerView.A
 
     fun addFixture(fixture: Fixture) {
         fixtures.add(fixture)
-        notifyDataSetChanged()
+        notifyItemInserted(this.fixtures.size - 1)
     }
 
     fun addFixtures(fixtures: Collection<Fixture>) {
+        val index = this.fixtures.size - 1
         this.fixtures.addAll(fixtures)
-        notifyDataSetChanged()
+        notifyItemRangeInserted(index, fixtures.size - 1)
+    }
+
+    fun removeFixture(index: Int) {
+        this.fixtures.removeAt(index)
+        notifyItemRemoved(index)
     }
 
     fun clear() {
         fixtures.clear()
-        notifyDataSetChanged()
+        notifyItemRangeRemoved(0, this.fixtures.size)
     }
 
     interface OnRetryClicked {
         fun onRetryClicked()
     }
 
-    protected inner class ViewHolder
-    internal constructor(itemView: View, internal var recyclerViewClickListener: RecyclerViewClickListener)
+    protected inner class ViewHolder constructor(itemView: View, var recyclerViewClickListener: RecyclerViewClickListener)
         : BaseViewHolder(itemView), View.OnClickListener {
 
         @BindView(R.id.fixture_home_team_logo)
@@ -164,7 +168,8 @@ class CompetitionFixturesAdapter(private val mContext: Context) : RecyclerView.A
         }
     }
 
-    internal inner class EmptyViewHolder(itemView: View, var recyclerViewClickListener: RecyclerViewClickListener) : BaseViewHolder(itemView) {
+    inner class EmptyViewHolder(itemView: View, var recyclerViewClickListener: RecyclerViewClickListener)
+        : BaseViewHolder(itemView) {
 
         @BindView(R.id.error_no_internet)
         lateinit var errorNoInternet: ImageView
@@ -181,7 +186,10 @@ class CompetitionFixturesAdapter(private val mContext: Context) : RecyclerView.A
 
         override fun onBind(position: Int) {
             super.onBind(position)
+            checkConnection()
+        }
 
+        fun checkConnection() {
             if (AppUtils.hasInternetConnection(mContext)) {
                 errorNoItems.visibility = View.VISIBLE
                 errorNoInternet.visibility = View.GONE
@@ -195,6 +203,7 @@ class CompetitionFixturesAdapter(private val mContext: Context) : RecyclerView.A
 
         @OnClick(R.id.retry)
         fun onRetryClick() {
+            checkConnection()
             onRetryClickedListener.onRetryClicked()
         }
     }

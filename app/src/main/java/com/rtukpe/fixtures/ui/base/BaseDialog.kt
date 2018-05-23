@@ -18,72 +18,52 @@ import com.rtukpe.fixtures.di.component.ActivityComponent
 
 abstract class BaseDialog : AppCompatDialogFragment(), DialogMvpView {
 
-    var baseActivity: BaseActivity? = null
+    lateinit var baseActivity: BaseActivity
         private set
-    private var mUnBinder: Unbinder? = null
+    lateinit var mUnBinder: Unbinder
 
     override val isNetworkConnected: Boolean
-        get() = baseActivity != null && baseActivity!!.isNetworkConnected
+        get() = baseActivity.isNetworkConnected
 
     val activityComponent: ActivityComponent?
-        get() = if (baseActivity != null) {
-            baseActivity!!.activityComponent
-        } else null
+        get() = baseActivity.activityComponent
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         if (context is BaseActivity) {
-            val mActivity = context as BaseActivity?
+            val mActivity = context
             this.baseActivity = mActivity
-            mActivity!!.onFragmentAttached()
+            mActivity.onFragmentAttached()
         }
     }
 
     override fun showLoading() {
-        if (baseActivity != null) {
-            baseActivity!!.showLoading()
-        }
+        baseActivity.showLoading()
     }
 
     override fun hideLoading() {
-        if (baseActivity != null) {
-            baseActivity!!.hideLoading()
-        }
+        baseActivity.hideLoading()
     }
 
     override fun onError(message: String) {
-        if (baseActivity != null) {
-            baseActivity!!.onError(message)
-        }
+        baseActivity.onError(message)
     }
 
     override fun onError(@StringRes resId: Int) {
-        if (baseActivity != null) {
-            baseActivity!!.onError(resId)
-        }
+        baseActivity.onError(resId)
     }
 
     override fun showMessage(message: String) {
-        if (baseActivity != null) {
-            baseActivity!!.showMessage(message)
-        }
+        baseActivity.showMessage(message)
     }
 
     override fun showMessage(@StringRes resId: Int) {
-        if (baseActivity != null) {
-            baseActivity!!.showMessage(resId)
-        }
-    }
-
-    override fun onDetach() {
-        baseActivity = null
-        super.onDetach()
+        baseActivity.showMessage(resId)
     }
 
     override fun hideKeyboard() {
-        if (baseActivity != null) {
-            baseActivity!!.hideKeyboard()
-        }
+
+        baseActivity.hideKeyboard()
     }
 
     fun setUnBinder(unBinder: Unbinder) {
@@ -100,12 +80,12 @@ abstract class BaseDialog : AppCompatDialogFragment(), DialogMvpView {
                 ViewGroup.LayoutParams.WRAP_CONTENT)
 
         // creating the fullscreen dialog
-        val dialog = Dialog(baseActivity!!)
+        val dialog = Dialog(baseActivity)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(root)
         if (dialog.window != null) {
-            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-            dialog.window!!.setLayout(
+            dialog.window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            dialog.window.setLayout(
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.WRAP_CONTENT)
         }
@@ -126,13 +106,11 @@ abstract class BaseDialog : AppCompatDialogFragment(), DialogMvpView {
 
     override fun dismissDialog(tag: String) {
         dismiss()
-        baseActivity!!.onFragmentDetached(tag)
+        baseActivity.onFragmentDetached(tag)
     }
 
     override fun onDestroy() {
-        if (mUnBinder != null) {
-            mUnBinder!!.unbind()
-        }
+        mUnBinder.unbind()
         super.onDestroy()
     }
 }

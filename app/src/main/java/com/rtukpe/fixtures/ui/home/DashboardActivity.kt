@@ -42,7 +42,7 @@ class DashboardActivity : BaseActivity(), DashboardMvpView, BottomNavigationView
 
         setContentView(R.layout.activity_dashboard)
 
-        activityComponent!!.inject(this)
+        activityComponent.inject(this)
 
         setUnBinder(ButterKnife.bind(this))
 

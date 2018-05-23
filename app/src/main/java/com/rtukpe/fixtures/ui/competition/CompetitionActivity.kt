@@ -15,7 +15,7 @@ import com.rtukpe.fixtures.ui.competition.fixtures.CompetitionFixturesFragment
 import com.rtukpe.fixtures.ui.competition.table.TableFragment
 import com.rtukpe.fixtures.ui.competition.teams.TeamsFragment
 import com.rtukpe.fixtures.ui.competitions.CompetitionsFragment
-import com.rtukpe.fixtures.ui.competitions.CompetitionsFragment.COMPETITION_NAME
+import com.rtukpe.fixtures.ui.competitions.CompetitionsFragment.Companion.COMPETITION_NAME
 import com.rtukpe.fixtures.utils.others.widgets.CustomViewPager
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper
 import javax.inject.Inject

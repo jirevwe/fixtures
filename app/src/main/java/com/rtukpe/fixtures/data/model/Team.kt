@@ -12,7 +12,7 @@ class Team {
     @SerializedName("shortName")
     lateinit var shortName: String
     @SerializedName("crestUrl")
-    lateinit var logo: String
+    var logo: String? = ""
 
     override fun toString(): String {
         return Gson().toJson(this)

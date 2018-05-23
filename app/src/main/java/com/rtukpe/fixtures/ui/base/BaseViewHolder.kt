@@ -7,7 +7,8 @@ import android.view.View
  * Created by rtukpe on 14/03/2018.
  */
 
-abstract class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+abstract class BaseViewHolder(itemView: View) :
+        RecyclerView.ViewHolder(itemView) {
 
     var currentPosition: Int = 0
         private set

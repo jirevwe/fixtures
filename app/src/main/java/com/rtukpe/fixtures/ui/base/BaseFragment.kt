@@ -18,20 +18,16 @@ import com.rtukpe.fixtures.utils.others.RecyclerViewClickListener
 
 abstract class BaseFragment : Fragment(), MvpView, RecyclerViewClickListener, OnBackClicked {
 
-    var baseActivity: BaseActivity? = null
+    lateinit var baseActivity: BaseActivity
         private set
-    private var mUnBinder: Unbinder? = null
-    private var mProgressDialog: ProgressDialog? = null
+    lateinit var mUnBinder: Unbinder
+    lateinit var mProgressDialog: ProgressDialog
 
     override val isNetworkConnected: Boolean
-        get() = baseActivity!!.isNetworkConnected
+        get() = baseActivity.isNetworkConnected
 
     val activityComponent: ActivityComponent?
-        get() = baseActivity?.activityComponent
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+        get() = baseActivity.activityComponent
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,50 +37,49 @@ abstract class BaseFragment : Fragment(), MvpView, RecyclerViewClickListener, On
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         if (context is BaseActivity) {
-            val activity = context as BaseActivity?
+            val activity = context as BaseActivity
             this.baseActivity = activity
-            activity!!.onFragmentAttached()
+            activity.onFragmentAttached()
         }
     }
 
     override fun showLoading() {
         hideLoading()
-        mProgressDialog = CommonUtils.showLoadingDialog(this.context)
+        mProgressDialog = CommonUtils.showLoadingDialog(baseActivity)
     }
 
     override fun hideLoading() {
-        if (mProgressDialog != null && mProgressDialog!!.isShowing) {
-            mProgressDialog!!.cancel()
+        if (mProgressDialog.isShowing) {
+            mProgressDialog.cancel()
         }
     }
 
     override fun onError(message: String) {
-        baseActivity?.onError(message)
+        baseActivity.onError(message)
     }
 
     override fun onError(@StringRes resId: Int) {
-        baseActivity?.onError(resId)
+        baseActivity.onError(resId)
     }
 
     override fun showMessage(message: String) {
-        baseActivity?.showMessage(message)
+        baseActivity.showMessage(message)
     }
 
     override fun showMessage(@StringRes resId: Int) {
-        baseActivity?.showMessage(resId)
+        baseActivity.showMessage(resId)
     }
 
     override fun show(message: String, useToast: Boolean) {
-        baseActivity?.show(message, useToast)
+        baseActivity.show(message, useToast)
     }
 
     override fun onDetach() {
-        baseActivity = null
         super.onDetach()
     }
 
     override fun hideKeyboard() {
-        baseActivity?.hideKeyboard()
+        baseActivity.hideKeyboard()
     }
 
     fun setUnBinder(unBinder: Unbinder) {
@@ -94,9 +89,7 @@ abstract class BaseFragment : Fragment(), MvpView, RecyclerViewClickListener, On
     protected abstract fun setUp(view: View)
 
     override fun onDestroy() {
-        if (mUnBinder != null) {
-            mUnBinder!!.unbind()
-        }
+        mUnBinder.unbind()
         super.onDestroy()
     }
 

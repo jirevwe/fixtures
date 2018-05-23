@@ -5,7 +5,7 @@ This is a demo project being created to learn how to use
  - [x] Dependency injection using Dagger2
  - [x] RxJava/RxAndroid
  - [x] MVP architecture pattern.
- - [ ] Hopefully I'd get to write some Kotlin :smiley:
+ - [x] Hopefully I'd get to write some Kotlin :smiley:
  
  The app will use an [open football scores api](http://api.football-data.org/) to show not-so-realtime scores.
  
@@ -17,6 +17,6 @@ This is a demo project being created to learn how to use
  - [x] Add remote repository to fetch scores other data
  - [x] View leagues tables, teams and players.
  - [x] UI for empty states and offline error messages.
- - [ ] Find a way to add team logos to fixtures view cos they're not included in the fixtures response payload.
+ - [x] Convert all source files to Kotlin
  - [ ] Room database and local repository for offline use.
- - [ ] Persist images?????????????????
+ - [ ] Change layout files to ConstraintLayout.
